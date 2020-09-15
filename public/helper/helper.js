@@ -418,43 +418,43 @@
 //		_this.gamepadconnected = function gamepadconnected(handler, params) { return substitute("gamepadconnected", handler, params); };
 //		_this.gamepaddisconnected = function gamepaddisconnected(handler, params) { return substitute("gamepaddisconnected", handler, params); };
 //		_this.deviceorientation = function deviceorientation(handler, params) { return substitute("deviceorientation", handler, params); };
+//
+//		_this.find = function find(selector) {
+//			var child = _tag.querySelector(selector);
+//
+//			var ctorName = getTagClassName(child);
+//			var ctor = findClass(ctorName);
+//			if (!ctor) {
+//				console.log("Not found '"+ctorName+"'");
+//				return null;
+//			}
+//			return new ctor(HelperJS.screen, child);
+//		};
+//
+//		_this.finds = function finds(selector) {
+//			var tags = _tag.querySelectorAll(selector);
+//			return new TagList(tags);
+//		};
 
-		_this.find = function find(selector) {
-			var child = _tag.querySelector(selector);
+//		_this.childs = function childs() {
+//			return new TagList(_tag.childNodes);
+//		};
 
-			var ctorName = getTagClassName(child);
-			var ctor = findClass(ctorName);
-			if (!ctor) {
-				console.log("Not found '"+ctorName+"'");
-				return null;
-			}
-			return new ctor(HelperJS.screen, child);
-		};
+//		_this.parent = function parent() {
+//			return (_tag.parentNode ? new Tag(_tag.parentNode) : null);
+//		};
 
-		_this.finds = function finds(selector) {
-			var tags = _tag.querySelectorAll(selector);
-			return new TagList(tags);
-		};
-
-		_this.childs = function childs() {
-			return new TagList(_tag.childNodes);
-		};
-
-		_this.parent = function parent() {
-			return (_tag.parentNode ? new Tag(_tag.parentNode) : null);
-		};
-
-		_this.duplicate = function duplicate(deep) {
-			var tag = _tag.cloneNode(deep);
-
-			var ctorName = getTagClassName(tag);
-			var ctor = findClass(ctorName);
-			if (!ctor) {
-				console.log("Not found '"+ctorName+"'");
-				return null;
-			}
-			return new ctor(HelperJS.screen, tag);
-		};
+//		_this.duplicate = function duplicate(deep) {
+//			var tag = _tag.cloneNode(deep);
+//
+//			var ctorName = getTagClassName(tag);
+//			var ctor = findClass(ctorName);
+//			if (!ctor) {
+//				console.log("Not found '"+ctorName+"'");
+//				return null;
+//			}
+//			return new ctor(HelperJS.screen, tag);
+//		};
 
 		_this.value = function value(v) {
 			if (typeof(v) === "undefined") {
@@ -511,25 +511,25 @@
 			return _tag.outerHTML;
 		};
 
-		_this.append = function append(v, condition) {
-			if (condition !== false && v) {
-				if (v instanceof Tag) {
-					_tag.appendChild(v.target);
-				}
-				else if (v instanceof Array) {
-					for (var i in v) {
-						_this.append(v[i]);
-					}
-				}
-				else if (typeof(v) === "object" && typeof(v.tagName) === "string") {
-					_tag.appendChild(v);
-				}
-				else if (typeof(v) === "function") {
-					_this.append(v());
-				}
-			}
-			return _this;
-		};
+//		_this.append = function append(v, condition) {
+//			if (condition !== false && v) {
+//				if (v instanceof Tag) {
+//					_tag.appendChild(v.target);
+//				}
+//				else if (v instanceof Array) {
+//					for (var i in v) {
+//						_this.append(v[i]);
+//					}
+//				}
+//				else if (typeof(v) === "object" && typeof(v.tagName) === "string") {
+//					_tag.appendChild(v);
+//				}
+//				else if (typeof(v) === "function") {
+//					_this.append(v());
+//				}
+//			}
+//			return _this;
+//		};
 
 		_this.moveNext = function moveNext(condition, success) {
 			if (typeof(condition) === "function" && typeof(success) === "undefined") {
@@ -573,25 +573,25 @@
 			return _this;
 		};
 
-		_this.remove = function remove(v, condition) {
-			if (condition !== false && v !== null) {
-				if (v instanceof Tag) {
-					_tag.removeChild(v.target);
-				}
-				else if (v instanceof Array) {
-					for (var i in v) {
-						_this.remove(v[i]);
-					}
-				}
-				else if (typeof(v) === "object" && typeof(v.tagName) === "string") {
-					_tag.removeChild(v);
-				}
-				else if (typeof(v) === "function") {
-					_this.remove(v());
-				}
-			}
-			return _this;
-		};
+//		_this.remove = function remove(v, condition) {
+//			if (condition !== false && v !== null) {
+//				if (v instanceof Tag) {
+//					_tag.removeChild(v.target);
+//				}
+//				else if (v instanceof Array) {
+//					for (var i in v) {
+//						_this.remove(v[i]);
+//					}
+//				}
+//				else if (typeof(v) === "object" && typeof(v.tagName) === "string") {
+//					_tag.removeChild(v);
+//				}
+//				else if (typeof(v) === "function") {
+//					_this.remove(v());
+//				}
+//			}
+//			return _this;
+//		};
 
 		_this.clear = function clear() {
 			_tag.innerHTML = null;
@@ -764,7 +764,7 @@
 		_this.loadContent = function loadContent(url, params) {
 			HelperJS.get(url)
 				.success(function(status, htmlText) {
-					_this.html(htmlText).mapping().initialize();
+					_this.html(htmlText).initialize();
 				})
 				.send(params || {});
 		};
@@ -1054,21 +1054,21 @@
 
 		ns.Tag = Tag;
 
-		ns.Control = classdef(Tag, function Control(screen, tag) {
+		ns.Control = classdef(Tag, function Control(ownerPanel, tag) {
 			Tag.call(this, tag);
 
 			var _base = this.base();
 			var _this = this;
 
-			_this.screen = screen;
+			_this.ownerPanel = ownerPanel;
 
 			_this.initialize = function initialize() {
 				//
 			};
 		});
 
-		ns.Button = classdef(ns.Control, function Button(screen, tag) {
-			ns.Control.call(this, screen, tag);
+		ns.Button = classdef(ns.Control, function Button(ownerPanel, tag) {
+			ns.Control.call(this, ownerPanel, tag);
 
 			var _base = this.base();
 			var _this = this;
@@ -1084,8 +1084,8 @@
 			};
 		});
 
-		ns.InputControl = classdef(ns.Control, function InputControl(screen, tag) {
-			ns.Control.call(this, screen, tag);
+		ns.InputControl = classdef(ns.Control, function InputControl(ownerPanel, tag) {
+			ns.Control.call(this, ownerPanel, tag);
 
 			var _base = this.base();
 			var _this = this;
@@ -1111,22 +1111,22 @@
 			};
 		});
 
-		ns.TextBox = classdef(ns.InputControl, function TextBox(screen, tag) {
-			ns.InputControl.call(this, screen, tag);
+		ns.TextBox = classdef(ns.InputControl, function TextBox(ownerPanel, tag) {
+			ns.InputControl.call(this, ownerPanel, tag);
 
 			var _base = this.base();
 			var _this = this;
 		});
 
-		ns.PasswordBox = classdef(ns.TextBox, function PasswordBox(screen, tag) {
-			ns.TextBox.call(this, screen, tag);
+		ns.PasswordBox = classdef(ns.TextBox, function PasswordBox(ownerPanel, tag) {
+			ns.TextBox.call(this, ownerPanel, tag);
 
 			var _base = this.base();
 			var _this = this;
 		});
 
-		ns.CheckBox = classdef(ns.InputControl, function CheckBox(screen, tag) {
-			ns.InputControl.call(this, screen, tag);
+		ns.CheckBox = classdef(ns.InputControl, function CheckBox(ownerPanel, tag) {
+			ns.InputControl.call(this, ownerPanel, tag);
 
 			var _base = this.base();
 			var _this = this;
@@ -1142,8 +1142,8 @@
 			};
 		});
 
-		ns.RadioButton = classdef(ns.InputControl, function RadioButton(screen, tag) {
-			ns.InputControl.call(this, screen, tag);
+		ns.RadioButton = classdef(ns.InputControl, function RadioButton(ownerPanel, tag) {
+			ns.InputControl.call(this, ownerPanel, tag);
 
 			var _base = this.base();
 			var _this = this;
@@ -1159,16 +1159,11 @@
 			};
 		});
 
-		ns.SelectBox = classdef(ns.InputControl, function SelectBox(screen, tag) {
-			ns.InputControl.call(this, screen, tag);
+		ns.SelectBox = classdef(ns.InputControl, function SelectBox(ownerPanel, tag) {
+			ns.InputControl.call(this, ownerPanel, tag);
 
 			var _base = this.base();
 			var _this = this;
-
-			_this.initialize = function initialize() {
-				_base.initialize();
-				//
-			};
 
 			_this.option = function option(key, label) {
 				_this.append(HelperJS.tag("option").value(key).html(label));
@@ -1176,22 +1171,24 @@
 			};
 		});
 
-		ns.MultiSelectBox = classdef(ns.SelectBox, function MultiSelectBox(screen, tag) {
-			ns.SelectBox.call(this, screen, tag);
+		ns.MultiSelectBox = classdef(ns.SelectBox, function MultiSelectBox(ownerPanel, tag) {
+			ns.SelectBox.call(this, ownerPanel, tag);
 
 			var _base = this.base();
 			var _this = this;
 		});
 
-		ns.Panel = classdef(ns.Control, function Panel(screen, tag) {
-			ns.Control.call(this, screen, tag);
+		ns.Panel = classdef(ns.Control, function Panel(ownerPanel, tag) {
+			ns.Control.call(this, ownerPanel, tag);
 
 			var _base = this.base();
 			var _this = this;
 
 			_this.controls = {};
 
-			_this.mapping = function mapping() {
+			function mapping() {
+				var controls = {};
+
 				var nodeList = _this.target.querySelectorAll("[data-id]");
 				for (var i=0; i<nodeList.length; i++) {
 					var node = nodeList[i];
@@ -1204,16 +1201,12 @@
 							console.log("Not found '"+ctorName+"'");
 						}
 						else {
-							if (typeof(_this.controls[id]) === "undefined") {
-								var control = new ctor(_this.screen, node);
-
-								_this.controls[id] = control;
-								if (control instanceof HelperJS.Panel) {
-									control.mapping().initialize();
-								}
-								else if (control instanceof HelperJS.Control) {
-									control.initialize();
-								}
+							if (ownerPanel && typeof(ownerPanel.controls[id]) !== "undefined") {
+								controls[id] = ownerPanel.controls[id];
+								delete ownerPanel.controls[id];
+							}
+							else if (typeof(_this.controls[id]) === "undefined") {
+								controls[id] = new ctor(_this, node);
 							}
 							else {
 								console.log("'"+id+"' is duplicated value of 'data-id' attribute's.");
@@ -1221,12 +1214,58 @@
 						}
 					}
 				}
-				return _this;
-			}
+				return controls;
+			};
+
+			_this.initPanel = null;
+
+			_this.initialize = function initialize() {
+				_base.initialize();
+
+				_this.controls = mapping();
+				for (var i in _this.controls) {
+					var control = _this.controls[i];
+					control.initialize();
+				}
+
+				if (typeof(_this.initPanel) === "function") {
+					_this.initPanel(_this.controls);
+				}
+			};
+
+			_this.find = function find(selector) {
+				var child = _this.target.querySelector(selector);
+
+				var ctorName = getTagClassName(child);
+				var ctor = findClass(ctorName);
+				if (!ctor) {
+					console.log("Not found '"+ctorName+"'");
+					return null;
+				}
+				return new ctor(_this, child);
+			};
+
+			_this.finds = function finds(selector) {
+				var tags = _this.target.querySelectorAll(selector);
+				return new TagList(tags);
+			};
+
+			_this.tagref = function tagref(target, controls) {
+				if (!controls) {
+					controls = _this.controls;
+				}
+				for (var i in controls) {
+					var control = controls[i];
+					if (control.target === target) {
+						return control;
+					}
+				}
+				return null;
+			};
 		});
 
-		ns.InlineFrame = classdef(ns.Control, function InlineFrame(screen, tag) {
-			ns.Control.call(this, screen, tag);
+		ns.InlineFrame = classdef(ns.Control, function InlineFrame(ownerPanel, tag) {
+			ns.Control.call(this, ownerPanel, tag);
 
 			var _base = this.base();
 			var _this = this;
@@ -1244,7 +1283,7 @@
 				_this.raise("Event", "message."+eventName, params);
 			};
 
-			_this.screen.on("message.connect", function(e) {
+			HelperJS.screen.on("message.connect", function(e) {
 				var data = e.data;
 				var targetId = data.targetId;
 				if (targetId === _id) {
@@ -1257,7 +1296,7 @@
 				}
 			});
 
-			_this.screen.on("message.disconnect", function(e) {
+			HelperJS.screen.on("message.disconnect", function(e) {
 				var data = e.data;
 				var targetId = data.targetId;
 				if (targetId === _id) {
@@ -1269,11 +1308,6 @@
 					e.stopPropagation();
 				}
 			});
-
-			_this.initialize = function initialize() {
-				_base.initialize();
-				//
-			};
 
 			_this.change = function(url, params) {
 				if (typeof(params) === "object") {
@@ -1294,15 +1328,15 @@
 			};
 		});
 
-		ns.Dialog = classdef(ns.Panel, function Dialog(screen, tag) {
-			ns.Panel.call(this, screen, tag);
+		ns.Dialog = classdef(ns.Panel, function Dialog(tag) {
+			ns.Panel.call(this, HelperJS.screen, tag);
 
 			var _base = this.base();
 			var _this = this;
 		});
 
 		ns.Screen = classdef(ns.Panel, function Screen(_settings) {
-			ns.Panel.call(this, this, document.body);
+			ns.Panel.call(this, null, document.body);
 
 			var _base = this.base();
 			var _this = this;
@@ -1352,8 +1386,6 @@
 			});
 
 			_this.initialize = function initialize() {
-				_base.initialize();
-
 				if (window.parent !== window.self && _window_name) {
 					if (window.MessageChannel) {
 						_messageChannel = new MessageChannel();
@@ -1364,6 +1396,8 @@
 						window.parent.postMessage({ "eventName":"connect", "targetId":_window_name }, window.parent.origin, [ _messageChannel.port2 ]);
 					}
 				}
+				//
+				_base.initialize();
 			};
 
 			_this.reload = function reload(force) {
@@ -1400,7 +1434,7 @@
 				window.addEventListener("load", function() {
 					HelperJS.screen = initializer();
 					if (HelperJS.screen instanceof HelperJS.Screen) {
-						HelperJS.screen.mapping().initialize();
+						HelperJS.screen.initialize();
 					}
 				});
 			}
@@ -1434,6 +1468,18 @@
 			HelperJS.run(function() {
 				return (typeof(params)==="undefined" ? new screenCtor() : new screenCtor(params));
 			});
+		};
+
+		ns.handles = function handles() {
+			return function(e, params) {
+				var dataId = e.target.dataset.id;
+				var eventType = e.type;
+				var method_name = dataId + '_' + eventType;
+				if (typeof(_this[method_name]) === "function") {
+					var method = _this[method_name];
+					method(e, params, _this.controls);
+				}
+			};
 		};
 
 		ns.get = function get(url) {
@@ -1491,43 +1537,43 @@
 			HelperJS.post(url).success(success).error(error).send(params);
 		};
 
-		ns.find = function find(selector) {
-			var tag = document.querySelector(selector);
+//		ns.find = function find(selector) {
+//			var tag = document.querySelector(selector);
+//
+//			var ctorName = getTagClassName(tag);
+//			var ctor = findClass(ctorName);
+//			if (!ctor) {
+//				console.log("Not found '"+ctorName+"'");
+//				return null;
+//			}
+//			return new ctor(HelperJS.screen, tag);
+//		};
+//
+//		ns.finds = function finds(selector) {
+//			var tags = document.querySelectorAll(selector);
+//			return new TagList(tags);
+//		};
 
-			var ctorName = getTagClassName(tag);
-			var ctor = findClass(ctorName);
-			if (!ctor) {
-				console.log("Not found '"+ctorName+"'");
-				return null;
-			}
-			return new ctor(HelperJS.screen, tag);
-		};
-
-		ns.finds = function finds(selector) {
-			var tags = document.querySelectorAll(selector);
-			return new TagList(tags);
-		};
-
-		ns.tag = function tag(tagName) {
-			if (typeof(tagName) === "string") {
-				return new HelperJS.Tag(document.createElement(tagName));
-			}
-			else if (tagName instanceof HelperJS.Tag) {
-				return tagName;
-			}
-			else if (tagName instanceof Node) {
-				var ctorName = getTagClassName(tagName);
-				var ctor = findClass(ctorName);
-				if (!ctor) {
-					console.log("Not found '"+ctorName+"'");
-					return null;
-				}
-				return new ctor(HelperJS.screen, tagName);
-			}
-			else {
-				return null;
-			}
-		};
+//		ns.tag = function tag(tagName) {
+//			if (typeof(tagName) === "string") {
+//				return new HelperJS.Tag(document.createElement(tagName));
+//			}
+//			else if (tagName instanceof HelperJS.Tag) {
+//				return tagName;
+//			}
+//			else if (tagName instanceof Node) {
+//				var ctorName = getTagClassName(tagName);
+//				var ctor = findClass(ctorName);
+//				if (!ctor) {
+//					console.log("Not found '"+ctorName+"'");
+//					return null;
+//				}
+//				return new ctor(HelperJS.screen, tagName);
+//			}
+//			else {
+//				return null;
+//			}
+//		};
 
 		ns.findClass = findClass;
 	});
