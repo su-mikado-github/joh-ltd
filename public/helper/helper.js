@@ -150,7 +150,15 @@
 				if (0 < result.length) {
 					result += '&';
 				}
-				result += (i+"="+(value===null ? '' : value));
+				if (!value) {
+					result += (i+"=");
+				}
+				else if (value instanceof Array) {
+					result += (i+"="+encodeURIComponent(value.join(",")));
+				}
+				else {
+					result += (i+"="+encodeURIComponent(value));
+				}
 			}
 			return result;
 		}
@@ -169,6 +177,9 @@
 				|| node.type.toUpperCase()==="TEXT" || node.type.toUpperCase()==="SEARCH" || node.type.toUpperCase()==="URL" || node.type.toUpperCase()==="EMAIL"
 				|| node.type.toUpperCase()==="TEL" || node.type.toUpperCase()==="NUMBER" || node.type.toUpperCase()==="DATE" || node.type.toUpperCase()==="TIME") {
 				ctorName = "HelperJS.TextBox";
+			}
+			else if (node.type.toUpperCase()==="HIDDEN") {
+				ctorName = "HelperJS.Hidden";
 			}
 			else if (node.type.toUpperCase()==="PASSWORD") {
 				ctorName = "HelperJS.PasswordBox";
@@ -284,6 +295,20 @@
 				request.open(method, _url + (queryString ? "?" + queryString : ""));
 				initRequest(request, _contentType, _headers);
 				request.send(null);
+			}
+		};
+
+		_this.sendJson = function sendJson(params) {
+			var request = createRequest(_success, _error);
+
+			var method = (typeof(_method)==="string" && 0 < _method.trim().length ? _method.trim() : "GET");
+			if (method === "POST") {
+				request.open(method, _url);
+				initRequest(request, _contentType, _headers);
+				if (typeof(params) === "object") {
+					initRequest(request, _contentType, _headers);
+					request.send(formatData({ input: JSON.stringify(params||{}) }));
+				}
 			}
 		};
 	});
@@ -455,21 +480,21 @@
 //			}
 //			return new ctor(HelperJS.screen, tag);
 //		};
-
-		_this.value = function value(v) {
-			if (typeof(v) === "undefined") {
-				return (typeof(_tag["value"]) === "undefined" ? null : _tag.value);
-			}
-			else if (typeof(_tag["value"]) !== "undefined") {
-				if (typeof(v) === "function") {
-					_tag.value = v();
-				}
-				else {
-					_tag.value = v;
-				}
-				return _this;
-			}
-		};
+//
+//		_this.value = function value(v) {
+//			if (typeof(v) === "undefined") {
+//				return (typeof(_tag["value"]) === "undefined" ? null : _tag.value);
+//			}
+//			else if (typeof(_tag["value"]) !== "undefined") {
+//				if (typeof(v) === "function") {
+//					_tag.value = v();
+//				}
+//				else {
+//					_tag.value = v;
+//				}
+//				return _this;
+//			}
+//		};
 
 		_this.text = function text(v) {
 			if (typeof(v) === "undefined") {
@@ -1109,6 +1134,28 @@
 					return _this;
 				}
 			};
+
+			_this.value = function value(v) {
+				if (typeof(v) === "undefined") {
+					return (typeof(tag["value"]) === "undefined" ? null : tag.value);
+				}
+				else {
+					if (typeof(v) === "function") {
+						tag.value = v();
+					}
+					else {
+						tag.value = v;
+					}
+					return _this;
+				}
+			};
+		});
+
+		ns.Hidden = classdef(ns.InputControl, function Hidden(ownerPanel, tag) {
+			ns.InputControl.call(this, ownerPanel, tag);
+
+			var _base = this.base();
+			var _this = this;
 		});
 
 		ns.TextBox = classdef(ns.InputControl, function TextBox(ownerPanel, tag) {
@@ -1141,6 +1188,16 @@
 				}
 			};
 		});
+		ns.CheckBox.checkedValue = function checkedValue(checkButtons) {
+			var result = [];
+			for (var i=0; i<checkButtons.length; i++) {
+				var checkButton = checkButtons[i];
+				if (checkButton.checked()) {
+					result.push(checkButton.value());
+				}
+			}
+			return result;
+		}
 
 		ns.RadioButton = classdef(ns.InputControl, function RadioButton(ownerPanel, tag) {
 			ns.InputControl.call(this, ownerPanel, tag);
@@ -1158,6 +1215,15 @@
 				}
 			};
 		});
+		ns.RadioButton.checkedValue = function checkedValue(radioButtons) {
+			for (var i=0; i<radioButtons.length; i++) {
+				var radioButton = radioButtons[i];
+				if (radioButton.checked()) {
+					return radioButton.value();
+				}
+			}
+			return null;
+		}
 
 		ns.SelectBox = classdef(ns.InputControl, function SelectBox(ownerPanel, tag) {
 			ns.InputControl.call(this, ownerPanel, tag);
@@ -1166,7 +1232,10 @@
 			var _this = this;
 
 			_this.option = function option(key, label) {
-				_this.append(HelperJS.tag("option").value(key).html(label));
+				var optionTag = document.createElement("option");
+				optionTag.value = key;
+				optionTag.innerHTML = label;
+				_this.target.appendChild(optionTag);
 				return _this;
 			};
 		});
@@ -1176,6 +1245,31 @@
 
 			var _base = this.base();
 			var _this = this;
+
+			_this.value = function value(v) {
+				if (typeof(v) === "undefined") {
+					var result = [];
+					for (var i in _this.target.options) {
+						if (_this.target.options[i].selected) {
+							result.push(_this.target.options[i].value);
+						}
+					}
+					return result;
+				}
+				else {
+					if (v instanceof Array) {
+						var values = {};
+						for (var i=0; i<v.length; i++) {
+							values[v[i]] = true;
+						}
+						for (var i=0; i<_this.target.options.length; i++) {
+							var optionValue = _this.target.options[i].value;
+							_this.target.options[i].selected = (values[optionValue] || false);
+						}
+					}
+					return _this;
+				}
+			};
 		});
 
 		ns.Panel = classdef(ns.Control, function Panel(ownerPanel, tag) {
@@ -1534,7 +1628,7 @@
 				}
 			};
 
-			HelperJS.post(url).success(success).error(error).send(params);
+			HelperJS.post(url).success(success).error(error).sendJson(params);
 		};
 
 //		ns.find = function find(selector) {

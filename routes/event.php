@@ -21,4 +21,5 @@ Route::prefix('system')->group(function() {
     Route::post('login', 'Event\\SystemController@login');
     Route::post('logout', 'Event\\SystemController@logout');
     Route::post('user_regist', 'Event\\SystemController@user_regist');
+    Route::post('new_user_check', 'Event\\SystemController@new_user_check');
 });

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Scene;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Models\DivisionValue;
 use App\Models\User;
 use App\Models\AttrDef;
 use App\Models\SystemPolicyValue;
@@ -12,15 +13,71 @@ use App\Models\SystemPolicyValue;
 use Log;
 use App\Helpers\SceneHelper;
 
-class NewUserController extends Controller {
+class NewUserPreviewController extends Controller {
     //
     public function index(Request $request) {
+        Log::debug(__FILE__ . '(' . __LINE__ . ')');
+        Log::debug($request->all());
         $params = SceneHelper::get($request);
+        Log::debug($params);
+
+        $user = $params['user'];
+        if (!$user) {
+            Log::error('仮会員情報が取得できません。');
+            return response('', 400);
+        }
+
+        //会員情報の属性定義を取得する
+        $attr_defs = AttrDef::rowsetByAttrDefGroupId('user');
+
+        //区分値マスタを区分ID・区分値IDをキーとした連想配列として取得
+        $division_value_map = DivisionValue::mapByDivisionIdId(['*'], 0);
+        Log::debug($division_value_map);
+
+        //登録する会員情報
+        $user_info = [];
+        $user_info[] = [ 'label'=>'メールアドレス', 'value'=>$params['email'] ];
+        $user_info[] = [ 'label'=>'パスワード', 'value'=>'********' ];
+
+        $regist_data_map = array_reduce($params['regist_data'], function($result, $item) { $result[$item['id']] = $item; return $result; }, []);
+        foreach ($attr_defs as $attr_def) {
+            switch ($attr_def->value_type) {
+                case 1:
+                case 11:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                    $user_info[] = [ 'label'=>$attr_def->name, 'value'=>$regist_data_map[$attr_def->id]['value'] ];
+                    break;
+                case 6:
+                    switch ($attr_def->selector_pattern) {
+                        case 1:
+                        case 2:
+                        case 4:
+                            $user_info[] = [ 'label'=>$attr_def->name, 'value'=>$division_value_map[$attr_def->selector_division_id][$regist_data_map[$attr_def->id]['value']]->name ];
+                            break;
+                        case 3:
+                        case 5:
+                            Log::debug($division_value_map[$attr_def->selector_division_id]);
+                            $ids = explode(',', $regist_data_map[$attr_def->id]['value']);
+                            $mapper = function($id) use($division_value_map, $attr_def) {
+                                Log::debug(__FILE__ . '(' . __LINE__ . ') => ' . $id);
+                                return $division_value_map[$attr_def->selector_division_id][$id]->name;
+                            };
+                            Log::debug(__FILE__ . '(' . __LINE__ . ') => ' . var_export($ids, true));
+                            $value = implode(' ', array_map($mapper, $ids));
+                            $user_info[] = [ 'label'=>$attr_def->name, 'value'=>$value ];
+                            break;
+                    }
+            }
+        }
 
 
-        return view('scene.new_user_index', [
+        return view('scene.new_user_preview_index', [
             //
-
+            'email' => $params['email'],
+            'user_info' => $user_info,
         ]);
     }
 }

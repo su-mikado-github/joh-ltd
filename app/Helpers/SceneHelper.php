@@ -22,4 +22,13 @@ class SceneHelper {
             session()->forget($key);
         }
     }
+
+    public static function url($url) {
+        if (request()->has('key')) {
+            return $url . (strpos($url, '?')===false ? '?' : '&') . 'key=' . request()->get('key');
+        }
+        else {
+            return $url;
+        }
+    }
 }

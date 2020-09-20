@@ -5,7 +5,6 @@
 @endsection
 
 @section('behavior')
-<script type="text/javascript" charset="utf-8" src="/behavior/user_regist"></script>
 @endsection
 
 @section('header')

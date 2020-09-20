@@ -583,6 +583,43 @@ dl.JOH-Virtical.Separated > *:last-child
 	line-height: 0.6rem;
 }
 
+{{-- 文字装飾 --}}
+.JOH-Font-Normal
+{
+	font-weight: normal;
+	text-decoration: none;
+}
+
+.JOH-Font-Weight-Normal
+{
+	font-weight: normal;
+}
+
+.JOH-Font-Weight-Bold
+{
+	font-weight: bold;
+}
+
+.JOH-Font-Underline
+{
+	text-decoration: underline;
+}
+
+.JOH-Font-Overline
+{
+	text-decoration: overline;
+}
+
+.JOH-Font-Cancel
+{
+	text-decoration: overline;
+}
+
+.JOH-Font-Blink
+{
+	text-decoration: blink;
+}
+
 {{-- インライン位置定義 --}}
 .JOH-IPos-Left
 {
