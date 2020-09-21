@@ -91,6 +91,11 @@ class SystemController extends Controller {
             return [ 'status'=>'INVALID', 'messages'=>'入力にエラーがあります。', 'errors'=>$validator->errors() ];
         }
 
+        $users = User::rowByEmail($input['mailAddress']);
+        if ($users) {
+            return [ 'status'=>'ERROR', 'messages'=>'既にそのメールアドレスは登録済みです。' ];
+        }
+
         $mailAddress = $input['mailAddress'];
         $temporary_regist_id = User::registNew($mailAddress);
 
@@ -102,7 +107,6 @@ class SystemController extends Controller {
 
     public function new_user_check(Request $request) {
         $input = json_decode($request->get('input', '{}'), true);
-
         Log::debug($input);        //DEBUG
 
         //会員情報の属性定義を取得する
@@ -248,21 +252,56 @@ class SystemController extends Controller {
 
         $regist_data = [];
         foreach ($attr_defs as $attr_def) {
-            $regist_data[] = [  'id'=>$attr_def->id, 'value'=>$request->get($attr_def->id) ];
+            $regist_data[] = [  'id'=>$attr_def->id, 'value'=>$input[$attr_def->id] ];
         }
 
-        $user = User::rowByTempraryRegisterId($request->get('temporary_regist_id'));
+        $user = User::rowByTempraryRegisterId($input['temporary_regist_id']);
         if (!$user) {
-            Log::error('仮会員情報が取得できません。' . var_export($request->get('temporary_regist_id'), true));
+            Log::error('仮会員情報が取得できません。');
             return response('', 400);
         }
 
         return [ 'status'=>'OK', 'url'=>SceneHelper::set('/scene/new_user_preview', [
-            'temprary_regist_id' => $input['temporary_regist_id'],
+            'temporary_regist_id' => $input['temporary_regist_id'],
             'user' => $user,
             'email' => $input['email'],
             'password' => $input['password'],
             'regist_data' => $regist_data,
         ]) ];
+    }
+
+    public function new_user_apply(Request $request) {
+        $params = SceneHelper::get($request);
+        Log::debug($params);        //DEBUG
+
+        //
+        $temporary_regist_id = $params['temporary_regist_id'];
+        $user = $params['user'];
+        $password = $params['password'];
+        $regist_data = $params['regist_data'];
+
+        try {
+            User::updateByPasswordFromTempraryRegistId($user->id, $temporary_regist_id, $password, $regist_data);
+        }
+        catch (\Exception $ex) {
+            Log::error($ex);
+            Log::error($params);
+            return [ 'status'=>'ERROR', 'messages'=>'会員情報の登録に失敗しました。' ];
+        }
+
+        //ロールを取得する
+        $user_roles = UserRole::getByUserId($user->id)->toArray();
+        $roles = Arr::pluck($user_roles, 'role_id');
+
+        //セッションにログイン者のプロファイルをセットする。
+        $profile = ProfileHelper::get();
+        $profile['user'] = $user;
+        $profile['roles'] = $roles ?: [];
+        ProfileHelper::set($profile);
+
+        //最終ログイン日時を更新する
+        User::updateLastLoginDtm($user->id);
+
+        return [ 'status'=>'OK', 'url'=>'/scene/top' ];
     }
 }

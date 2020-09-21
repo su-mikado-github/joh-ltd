@@ -15,6 +15,9 @@ Route::get('/', function () {
     return redirect('/scene/top');
 });
 
+// Route::get('/{status}', function(Request $request, $status) {
+// });
+
 //画面用ルーティング
 Route::prefix('scene')->group(function() {
     //グッドライフTOP
@@ -24,7 +27,6 @@ Route::prefix('scene')->group(function() {
     Route::get('regist_mail_send', 'Scene\RegistMailSendController@index');
     Route::get('new_user', 'Scene\NewUserController@index');
     Route::get('new_user_preview', 'Scene\NewUserPreviewController@index');
-
 
 
 
@@ -39,6 +41,7 @@ Route::prefix('behavior')->group(function() {
     Route::get('attest', function() { return Response::view('behavior.attest')->header('Content-Type', 'text/javascript; charset=utf-8'); });
     Route::get('user_regist', function() { return Response::view('behavior.user_regist')->header('Content-Type', 'text/javascript; charset=utf-8'); });
     Route::get('new_user', function() { return Response::view('behavior.new_user')->header('Content-Type', 'text/javascript; charset=utf-8'); });
+    Route::get('new_user_preview', function() { return Response::view('behavior.new_user_preview')->header('Content-Type', 'text/javascript; charset=utf-8'); });
 
 
 });

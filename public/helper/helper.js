@@ -1626,6 +1626,9 @@
 				if (typeof(_error) === "function") {
 					_error(status);
 				}
+				else {
+					location.assign('/'+status);
+				}
 			};
 
 			HelperJS.post(url).success(success).error(error).sendJson(params);
