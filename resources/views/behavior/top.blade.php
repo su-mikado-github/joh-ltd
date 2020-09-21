@@ -4,7 +4,7 @@ HelperJS.screendef(function Top() {
 	var _base = this.base();
 	var _this = this;
 
-	_this.initialize = function initialize() {
+	_this.initPanel = function initPanel() {
 		//
 	};
 });

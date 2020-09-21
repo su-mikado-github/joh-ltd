@@ -9,7 +9,25 @@ class ProfileHelper {
         if (!$profile) {
             $profile = session('profile', []);
         }
-        return (!$profile ? true : empty($profile['roles']));
+
+        if (!$profile) {
+            return true;
+        }
+        else if (empty($profile['roles'])) {
+            return true;
+        }
+        else if (count($profile['roles'])==1 && in_array('Guest', $profile['roles'])) {
+            return true;
+        }
+        return false;
+    }
+
+    public static function is_role($role, $profile=null) {
+        if (!$profile) {
+            $profile = session('profile', []);
+        }
+
+        return (!empty($profile) && is_array($profile['roles']) && in_array($role, $profile['roles']));
     }
 
     public static function get() {

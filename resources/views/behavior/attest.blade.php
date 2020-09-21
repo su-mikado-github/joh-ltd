@@ -28,7 +28,7 @@ HelperJS.screendef(function Attest() {
 		});
 	};
 
-	_this.initialize = function initialize() {
-		_this.controls.btnGoLogin.click(_this.handles());
+	_this.initPanel = function initPanel(controls) {
+		controls.btnGoLogin.click(_this.handles());
 	};
 });

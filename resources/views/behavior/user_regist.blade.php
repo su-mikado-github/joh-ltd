@@ -22,7 +22,7 @@ HelperJS.screendef(function UserRegist() {
 		});
 	};
 
-	_this.initialize = function initialize() {
+	_this.initPanel = function initPanel() {
 		//
 		_this.controls.btnSendMail.click(_this.handles());
 	};

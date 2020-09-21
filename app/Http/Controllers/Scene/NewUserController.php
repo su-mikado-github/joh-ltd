@@ -43,6 +43,7 @@ class NewUserController extends Controller {
 
         return view('scene.new_user_index', [
             //
+            'temporary_regist_id' => $temporary_regist_id,
             'email'=>$user->email,
             'attr_defs' => $attr_defs,
         ]);
