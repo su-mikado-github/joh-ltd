@@ -16,52 +16,7 @@ HelperJS.screendef(function NewUserPreview() {
 
     _this.btnAccept_click = function btnAccept_click(e, params, ctrls) {
         //
-        var data = {
-            temporary_regist_id: ctrls.varTemporaryRegistId.value(),
-			email: ctrls.txtMailAddress.value(),
-            password: ctrls.txtLoginPassword.value(),
-            password_confirmation: ctrls.txtLoginPasswordConfirmation.value(),
-        };
-<?php   foreach ($attr_defs as $attr_def) {
-            $id = 'attr' . str_replace('_', '', ucwords($attr_def->id, '_'));
-            switch ($attr_def->value_type) {
-                case 1:
-                case 11:
-                case 2:
-                case 3:
-                case 4:
-                case 5: ?>
-                    data["{!! $attr_def->id !!}"] = ctrls.{!! $id !!}.value();
-<?php               break;
-                case 6:
-                    $list = DivisionValue::rowsetByDivisionId($attr_def->selector_division_id);
-                    switch ($attr_def->selector_pattern) {
-                    case 1:
-                    case 4:
-                    case 5: ?>
-                        data["{!! $attr_def->id !!}"] = ctrls.{!! $id !!}.value();
-<?php                   break;
-                    case 2: ?>
-                        var radioButtons = [];
-<?php                   foreach ($list as $item) { ?>
-                            radioButtons.push(ctrls.{!! $id !!}{!! $item->value !!});
-<?php                   } ?>
-                        data["{!! $attr_def->id !!}"] = HelperJS.RadioButton.checkedValue(radioButtons);
-<?php
-                        break;
-                    case 3: ?>
-                        var checkBoxs = [];
-<?php                   foreach ($list as $item) { ?>
-                            checkBoxs.push(ctrls.{!! $id !!}{!! $item->value !!});
-<?php                   } ?>
-                        data["{!! $attr_def->id !!}"] = HelperJS.CheckBox.checkedValue(checkBoxs);
-<?php                   break;
-                    }
-                    break;
-            }
-        } ?>
-
-        HelperJS.api("{!! SceneHelper::url('/event/system/new_user') !!}", data, function(result) {
+        HelperJS.api("{!! SceneHelper::url('/event/system/new_user_apply') !!}", {}, function(result) {
             if (result.status === "OK") {
                 location.assign(result.url);
             }

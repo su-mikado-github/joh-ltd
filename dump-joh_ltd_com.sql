@@ -777,7 +777,7 @@ CREATE TABLE `roles` (
 
 LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` VALUES ('*','システム管理者',0,'*',0,'*','*',0),('Guest','ゲスト',0,'*',0,'*','*',0);
+INSERT INTO `roles` VALUES ('*','システム管理者',0,'*',0,'*','*',0),('Guest','ゲスト',0,'*',0,'*','*',0),('User','一般ユーザー',0,'*',0,'*','*',0);
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -955,13 +955,13 @@ INSERT INTO `systems` VALUES ('*','/images/GoodLife_logo_typeB.png','GoodLife','
 UNLOCK TABLES;
 
 --
--- Table structure for table `temprary_regists`
+-- Table structure for table `temporary_regists`
 --
 
-DROP TABLE IF EXISTS `temprary_regists`;
+DROP TABLE IF EXISTS `temporary_regists`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `temprary_regists` (
+CREATE TABLE `temporary_regists` (
   `id` varchar(64) NOT NULL COMMENT '仮登録ID',
   `user_id` varchar(64) NOT NULL COMMENT '利用者ID',
   `apply_dtm` datetime NOT NULL COMMENT '仮登録日時',
@@ -976,13 +976,13 @@ CREATE TABLE `temprary_regists` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `temprary_regists`
+-- Dumping data for table `temporary_regists`
 --
 
-LOCK TABLES `temprary_regists` WRITE;
-/*!40000 ALTER TABLE `temprary_regists` DISABLE KEYS */;
-INSERT INTO `temprary_regists` VALUES ('5f5dae4ce3dcd','5f5dae4ce3cc6','2021-09-13 14:29:48',1599974988,'5f5dae4ce3cc6',1599974988,'5f5dae4ce3cc6','App\\Models\\{closure}',0),('5f5e5c7e0ba48','5f5e5c7e0ba26','2021-09-14 02:53:02',1600019582,'5f5e5c7e0ba26',1600019582,'5f5e5c7e0ba26','App\\Models\\{closure}',0),('5f60072e93ec0','5f60072e93e99','2021-09-15 09:13:34',1600128814,'5f60072e93e99',1600128814,'5f60072e93e99','App\\Models\\{closure}',0),('5f62debc4af1d','5f62debc4af1c','2021-09-17 12:57:48',1600315068,'5f62debc4af1c',1600315068,'5f62debc4af1c','App\\Models\\{closure}',0),('5f662fb4a0226','5f662fb4a0223','2021-09-20 01:20:04',1600532404,'5f662fb4a0223',1600532404,'5f662fb4a0223','App\\Models\\{closure}',0);
-/*!40000 ALTER TABLE `temprary_regists` ENABLE KEYS */;
+LOCK TABLES `temporary_regists` WRITE;
+/*!40000 ALTER TABLE `temporary_regists` DISABLE KEYS */;
+INSERT INTO `temporary_regists` VALUES ('5f68c0146e087','5f68c0146e084','2020-09-22 00:00:36',1600700436,'5f68c0146e084',1600700436,'5f68c0146e084','App\\Models\\{closure}',0),('5f68c74c5921e','5f68c74c5921d','2020-09-22 00:31:24',1600702284,'5f68c74c5921d',1600702284,'5f68c74c5921d','App\\Models\\{closure}',0),('5f68c96d6bc03','5f68c96d6bbff','2020-09-22 00:40:29',1600702829,'5f68c96d6bbff',1600702829,'5f68c96d6bbff','App\\Models\\{closure}',0);
+/*!40000 ALTER TABLE `temporary_regists` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1044,6 +1044,7 @@ CREATE TABLE `user_attrs` (
 
 LOCK TABLES `user_attrs` WRITE;
 /*!40000 ALTER TABLE `user_attrs` DISABLE KEYS */;
+INSERT INTO `user_attrs` VALUES ('5f68c0146e084','company_name','株式会社サンプル',1,1600700992,'5f68c0146e084',1600700992,'5f68c0146e084','App\\Models\\{closure}',0),('5f68c0146e084','company_name_kana','カブシキガイシャサンプル',1,1600700992,'5f68c0146e084',1600700992,'5f68c0146e084','App\\Models\\{closure}',0),('5f68c0146e084','employee_cout','1',1,1600700992,'5f68c0146e084',1600700992,'5f68c0146e084','App\\Models\\{closure}',0),('5f68c0146e084','full_name','牛山修二',1,1600700992,'5f68c0146e084',1600700992,'5f68c0146e084','App\\Models\\{closure}',0),('5f68c0146e084','full_name_kana','ウシヤマシュウジ',1,1600700992,'5f68c0146e084',1600700992,'5f68c0146e084','App\\Models\\{closure}',0),('5f68c0146e084','industry','17',1,1600700992,'5f68c0146e084',1600700992,'5f68c0146e084','App\\Models\\{closure}',0),('5f68c0146e084','prefecture','13',1,1600700992,'5f68c0146e084',1600700992,'5f68c0146e084','App\\Models\\{closure}',0),('5f68c0146e084','purpose_use','private',1,1600700992,'5f68c0146e084',1600700992,'5f68c0146e084','App\\Models\\{closure}',0),('5f68c0146e084','qa_how_know','2,4,6,8,9',1,1600700992,'5f68c0146e084',1600700992,'5f68c0146e084','App\\Models\\{closure}',0),('5f68c0146e084','qa_post_is_first','yes',1,1600700992,'5f68c0146e084',1600700992,'5f68c0146e084','App\\Models\\{closure}',0),('5f68c0146e084','tel_no','09012345678',1,1600700992,'5f68c0146e084',1600700992,'5f68c0146e084','App\\Models\\{closure}',0),('5f68c96d6bbff','company_name','株式会社サンプルＢ',1,1600704348,'5f68c96d6bbff',1600704348,'5f68c96d6bbff','App\\Models\\{closure}',0),('5f68c96d6bbff','company_name_kana','カブシキガイシャサンプルビー',1,1600704348,'5f68c96d6bbff',1600704348,'5f68c96d6bbff','App\\Models\\{closure}',0),('5f68c96d6bbff','employee_cout','2',1,1600704348,'5f68c96d6bbff',1600704348,'5f68c96d6bbff','App\\Models\\{closure}',0),('5f68c96d6bbff','full_name','牛山修二Ｂ',1,1600704348,'5f68c96d6bbff',1600704348,'5f68c96d6bbff','App\\Models\\{closure}',0),('5f68c96d6bbff','full_name_kana','ウシヤマシュウジビー',1,1600704348,'5f68c96d6bbff',1600704348,'5f68c96d6bbff','App\\Models\\{closure}',0),('5f68c96d6bbff','industry','17',1,1600704348,'5f68c96d6bbff',1600704348,'5f68c96d6bbff','App\\Models\\{closure}',0),('5f68c96d6bbff','prefecture','13',1,1600704348,'5f68c96d6bbff',1600704348,'5f68c96d6bbff','App\\Models\\{closure}',0),('5f68c96d6bbff','purpose_use','company',1,1600704348,'5f68c96d6bbff',1600704348,'5f68c96d6bbff','App\\Models\\{closure}',0),('5f68c96d6bbff','qa_how_know','2,6,8,9',1,1600704348,'5f68c96d6bbff',1600704348,'5f68c96d6bbff','App\\Models\\{closure}',0),('5f68c96d6bbff','qa_post_is_first','no',1,1600704348,'5f68c96d6bbff',1600704348,'5f68c96d6bbff','App\\Models\\{closure}',0),('5f68c96d6bbff','tel_no','0421234567',1,1600704348,'5f68c96d6bbff',1600704348,'5f68c96d6bbff','App\\Models\\{closure}',0);
 /*!40000 ALTER TABLE `user_attrs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1073,7 +1074,7 @@ CREATE TABLE `user_passwords` (
 
 LOCK TABLES `user_passwords` WRITE;
 /*!40000 ALTER TABLE `user_passwords` DISABLE KEYS */;
-INSERT INTO `user_passwords` VALUES ('*','5f4dcc3b5aa765d61d8327deb882cf99',0,'*',0,'*','*',0);
+INSERT INTO `user_passwords` VALUES ('*','5f4dcc3b5aa765d61d8327deb882cf99',0,'*',0,'*','*',0),('5f68c0146e084','5f4dcc3b5aa765d61d8327deb882cf99',1600700992,'5f68c0146e084',1600700992,'5f68c0146e084','App\\Models\\{closure}',0),('5f68c96d6bbff','5f4dcc3b5aa765d61d8327deb882cf99',1600704348,'5f68c96d6bbff',1600704348,'5f68c96d6bbff','App\\Models\\{closure}',0);
 /*!40000 ALTER TABLE `user_passwords` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1105,7 +1106,7 @@ CREATE TABLE `user_roles` (
 
 LOCK TABLES `user_roles` WRITE;
 /*!40000 ALTER TABLE `user_roles` DISABLE KEYS */;
-INSERT INTO `user_roles` VALUES ('*','*','1971-01-01','9999-12-31',0,'*',0,'*','*',0);
+INSERT INTO `user_roles` VALUES ('*','*','1971-01-01','9999-12-31',0,'*',0,'*','*',0),('5f68c96d6bbff','User','0001-01-01','9999-12-31',1600704348,'5f68c96d6bbff',1600704348,'5f68c96d6bbff','App\\Models\\{closure}',0);
 /*!40000 ALTER TABLE `user_roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1141,7 +1142,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('*','システム管理者','shuji.ushiyama@gmail.com','admin',1,0,'2020-09-20 01:19:30',NULL,0,'*',1600532370,'*','*',0),('5f5c50c0531de',NULL,'shuji.ushiyama@gmail.com','shuji.ushiyama@gmail.com',0,1,NULL,NULL,1599885504,'5f5c50c0531de',1600532353,'*','App\\Models\\{closure}',0),('5f5c510c98b80',NULL,'shuji.ushiyama@gmail.com','shuji.ushiyama@gmail.com',0,0,NULL,NULL,1599885580,'5f5c510c98b80',1599885580,'5f5c510c98b80','App\\Models\\{closure}',0),('5f5c515cb9a0a',NULL,'shuji.ushiyama@gmail.com','shuji.ushiyama@gmail.com',0,0,NULL,NULL,1599885660,'5f5c515cb9a0a',1599885660,'5f5c515cb9a0a','App\\Models\\{closure}',0),('5f5c52b530136',NULL,'shuji.ushiyama@gmail.com','shuji.ushiyama@gmail.com',0,0,NULL,NULL,1599886005,'5f5c52b530136',1599886005,'5f5c52b530136','App\\Models\\{closure}',0),('5f5c539e04cc4',NULL,'shuji.ushiyama@gmail.com','shuji.ushiyama@gmail.com',0,0,NULL,NULL,1599886238,'5f5c539e04cc4',1599886238,'5f5c539e04cc4','App\\Models\\{closure}',0),('5f5c53eb11f84',NULL,'shuji.ushiyama@gmail.com','shuji.ushiyama@gmail.com',0,0,NULL,NULL,1599886315,'5f5c53eb11f84',1599886315,'5f5c53eb11f84','App\\Models\\{closure}',0),('5f5c543449ebe',NULL,'shuji.ushiyama@gmail.com','shuji.ushiyama@gmail.com',0,0,NULL,NULL,1599886388,'5f5c543449ebe',1599886388,'5f5c543449ebe','App\\Models\\{closure}',0),('5f5c562826243',NULL,'shuji.ushiyama@gmail.com','shuji.ushiyama@gmail.com',0,0,NULL,NULL,1599886888,'5f5c562826243',1599886888,'5f5c562826243','App\\Models\\{closure}',0),('5f5c5d7424e47',NULL,'shuji.ushiyama@gmail.com','shuji.ushiyama@gmail.com',0,0,NULL,NULL,1599888756,'5f5c5d7424e47',1599888756,'5f5c5d7424e47','App\\Models\\{closure}',0),('5f5cdc91af424',NULL,'shuji.ushiyama@gmail.com','shuji.ushiyama@gmail.com',0,0,NULL,NULL,1599921297,'5f5cdc91af424',1599921297,'5f5cdc91af424','App\\Models\\{closure}',0),('5f5cdcbe8208a',NULL,'shuji.ushiyama@gmail.com','shuji.ushiyama@gmail.com',0,0,NULL,NULL,1599921342,'5f5cdcbe8208a',1599921342,'5f5cdcbe8208a','App\\Models\\{closure}',0),('5f5cddd53dbde',NULL,'shuji.ushiyama@gmail.com','shuji.ushiyama@gmail.com',0,0,NULL,NULL,1599921621,'5f5cddd53dbde',1599921621,'5f5cddd53dbde','App\\Models\\{closure}',0),('5f5cde347e125',NULL,'shuji.ushiyama@gmail.com','shuji.ushiyama@gmail.com',0,0,NULL,NULL,1599921716,'5f5cde347e125',1599921716,'5f5cde347e125','App\\Models\\{closure}',0),('5f5cdfe2de913',NULL,'shuji.ushiyama@gmail.com','shuji.ushiyama@gmail.com',0,0,NULL,NULL,1599922146,'5f5cdfe2de913',1599922146,'5f5cdfe2de913','App\\Models\\{closure}',0),('5f5ce09f7233f',NULL,'shuji.ushiyama@gmail.com','shuji.ushiyama@gmail.com',0,0,NULL,NULL,1599922335,'5f5ce09f7233f',1599922335,'5f5ce09f7233f','App\\Models\\{closure}',0),('5f5ce1c421665',NULL,'shuji.ushiyama@gmail.com','shuji.ushiyama@gmail.com',0,0,NULL,NULL,1599922628,'5f5ce1c421665',1599922628,'5f5ce1c421665','App\\Models\\{closure}',0),('5f5ce275508db',NULL,'shuji.ushiyama@gmail.com','shuji.ushiyama@gmail.com',0,0,NULL,NULL,1599922805,'5f5ce275508db',1599922805,'5f5ce275508db','App\\Models\\{closure}',0),('5f5ce474816a7',NULL,'shuji.ushiyama@gmail.com','shuji.ushiyama@gmail.com',0,0,NULL,NULL,1599923316,'5f5ce474816a7',1599923316,'5f5ce474816a7','App\\Models\\{closure}',0),('5f5ce49f9414d',NULL,'shuji.ushiyama@gmail.com','shuji.ushiyama@gmail.com',0,0,NULL,NULL,1599923359,'5f5ce49f9414d',1599923359,'5f5ce49f9414d','App\\Models\\{closure}',0),('5f5ce5aa4eb49',NULL,'shuji.ushiyama@gmail.com','shuji.ushiyama@gmail.com',0,0,NULL,NULL,1599923626,'5f5ce5aa4eb49',1599923626,'5f5ce5aa4eb49','App\\Models\\{closure}',0),('5f5ce5dcd9c9b',NULL,'shuji.ushiyama@gmail.com','shuji.ushiyama@gmail.com',0,0,NULL,NULL,1599923676,'5f5ce5dcd9c9b',1599923676,'5f5ce5dcd9c9b','App\\Models\\{closure}',0),('5f5ce7835e8d9',NULL,'shuji.ushiyama@gmail.com','shuji.ushiyama@gmail.com',0,0,NULL,NULL,1599924099,'5f5ce7835e8d9',1599924099,'5f5ce7835e8d9','App\\Models\\{closure}',0),('5f5ce93b37597',NULL,'shuji.ushiyama@gmail.com','shuji.ushiyama@gmail.com',0,0,NULL,NULL,1599924539,'5f5ce93b37597',1599924539,'5f5ce93b37597','App\\Models\\{closure}',0),('5f5ce959b2887',NULL,'shuji.ushiyama@gmail.com','shuji.ushiyama@gmail.com',0,0,NULL,NULL,1599924569,'5f5ce959b2887',1599924569,'5f5ce959b2887','App\\Models\\{closure}',0),('5f5ce98ba30a2',NULL,'shuji.ushiyama@gmail.com','shuji.ushiyama@gmail.com',0,0,NULL,NULL,1599924619,'5f5ce98ba30a2',1599924619,'5f5ce98ba30a2','App\\Models\\{closure}',0),('5f5ce9b596fdc',NULL,'shuji.ushiyama@gmail.com','shuji.ushiyama@gmail.com',0,0,NULL,NULL,1599924661,'5f5ce9b596fdc',1599924661,'5f5ce9b596fdc','App\\Models\\{closure}',0),('5f5cea4b7e654',NULL,'shuji.ushiyama@gmail.com','shuji.ushiyama@gmail.com',0,0,NULL,NULL,1599924811,'5f5cea4b7e654',1599924811,'5f5cea4b7e654','App\\Models\\{closure}',0),('5f5dae4ce3cc6',NULL,'shuji.ushiyama@gmail.com','shuji.ushiyama@gmail.com',0,0,NULL,NULL,1599974988,'5f5dae4ce3cc6',1599974988,'5f5dae4ce3cc6','App\\Models\\{closure}',0),('5f5e5c7e0ba26',NULL,'shuji_ushiyama@hotmail.com','shuji_ushiyama@hotmail.com',0,0,NULL,NULL,1600019582,'5f5e5c7e0ba26',1600019582,'5f5e5c7e0ba26','App\\Models\\{closure}',0),('5f60072e93e99',NULL,'shuji.ushiyama@gmail.com','shuji.ushiyama@gmail.com',0,0,NULL,NULL,1600128814,'5f60072e93e99',1600128814,'5f60072e93e99','App\\Models\\{closure}',0),('5f62debc4af1c',NULL,'shuji.ushiyama@gmail.com','shuji.ushiyama@gmail.com',0,0,NULL,NULL,1600315068,'5f62debc4af1c',1600315068,'5f62debc4af1c','App\\Models\\{closure}',0),('5f662fb4a0223',NULL,'shuji.ushiyama@gmail.com','shuji.ushiyama@gmail.com',0,0,NULL,NULL,1600532404,'5f662fb4a0223',1600532404,'5f662fb4a0223','App\\Models\\{closure}',0);
+INSERT INTO `users` VALUES ('*','システム管理者','shuji.ushiyama@gmail.com','admin',1,0,'2020-09-20 01:19:30',NULL,0,'*',1600532370,'*','*',0),('5f68c0146e084',NULL,'shuji.ushiyama@gmail.com','shuji.ushiyama@gmail.com',0,0,'2020-09-22 00:12:40','2020-09-22 00:09:52',1600700436,'5f68c0146e084',1600701160,'5f68c0146e084','App\\Models\\{closure}',0),('5f68c96d6bbff',NULL,'shuji_ushiyama@hotmail.com','shuji_ushiyama@hotmail.com',0,0,'2020-09-22 01:05:48','2020-09-22 01:05:48',1600702829,'5f68c96d6bbff',1600704348,'5f68c96d6bbff','App\\Models\\{closure}',0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -1154,4 +1155,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-09-20 19:24:56
+-- Dump completed on 2020-09-22  1:06:29

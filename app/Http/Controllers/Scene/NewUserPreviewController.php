@@ -16,8 +16,6 @@ use App\Helpers\SceneHelper;
 class NewUserPreviewController extends Controller {
     //
     public function index(Request $request) {
-        Log::debug(__FILE__ . '(' . __LINE__ . ')');
-        Log::debug($request->all());
         $params = SceneHelper::get($request);
         Log::debug($params);
 
@@ -32,7 +30,6 @@ class NewUserPreviewController extends Controller {
 
         //区分値マスタを区分ID・区分値IDをキーとした連想配列として取得
         $division_value_map = DivisionValue::mapByDivisionIdId(['*'], 0);
-        Log::debug($division_value_map);
 
         //登録する会員情報
         $user_info = [];
@@ -59,20 +56,15 @@ class NewUserPreviewController extends Controller {
                             break;
                         case 3:
                         case 5:
-                            Log::debug($division_value_map[$attr_def->selector_division_id]);
-                            $ids = explode(',', $regist_data_map[$attr_def->id]['value']);
                             $mapper = function($id) use($division_value_map, $attr_def) {
-                                Log::debug(__FILE__ . '(' . __LINE__ . ') => ' . $id);
                                 return $division_value_map[$attr_def->selector_division_id][$id]->name;
                             };
-                            Log::debug(__FILE__ . '(' . __LINE__ . ') => ' . var_export($ids, true));
-                            $value = implode(' ', array_map($mapper, $ids));
+                            $value = implode(' ', array_map($mapper, $regist_data_map[$attr_def->id]['value']));
                             $user_info[] = [ 'label'=>$attr_def->name, 'value'=>$value ];
                             break;
                     }
             }
         }
-
 
         return view('scene.new_user_preview_index', [
             //
