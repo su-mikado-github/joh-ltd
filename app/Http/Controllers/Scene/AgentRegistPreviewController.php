@@ -13,28 +13,20 @@ use App\Models\SystemPolicyValue;
 use Log;
 use App\Helpers\SceneHelper;
 
-class NewUserPreviewController extends Controller {
+class AgentRegistPreviewController extends Controller {
     //
     public function index(Request $request) {
         $params = SceneHelper::get($request);
         Log::debug($params);
 
-        $user = $params['user'];
-        if (!$user) {
-            Log::error('仮会員情報が取得できません。');
-            return response('', 400);
-        }
-
         //会員情報の属性定義を取得する
-        $attr_defs = AttrDef::rowsetByAttrDefGroupId('user');
+        $attr_defs = AttrDef::rowsetByAttrDefGroupId('agent');
 
         //区分値マスタを区分ID・区分値IDをキーとした連想配列として取得
         $division_value_map = DivisionValue::mapByDivisionIdId(['*'], 0);
 
         //登録する会員情報
         $user_info = [];
-        $user_info[] = [ 'label'=>'メールアドレス', 'value'=>$params['email'] ];
-        $user_info[] = [ 'label'=>'パスワード', 'value'=>'********' ];
 
         $regist_data_map = array_reduce($params['regist_data'], function($result, $item) { $result[$item['id']] = $item; return $result; }, []);
         foreach ($attr_defs as $attr_def) {
@@ -66,9 +58,8 @@ class NewUserPreviewController extends Controller {
             }
         }
 
-        return view('scene.new_user_preview_index', [
+        return view('scene.agent_regist_preview_index', [
             //
-            'email' => $params['email'],
             'user_info' => $user_info,
         ]);
     }

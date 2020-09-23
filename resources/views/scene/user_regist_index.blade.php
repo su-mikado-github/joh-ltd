@@ -39,7 +39,7 @@
       <dl class="JOH-W-Full">
         <dt style="margin-bottom:1em;"><label for="txtMailAddress">メールアドレスを入力してください。<br>入力したメールアドレスへ認証メールが自動送信されます。</label></dt>
         <dd style="margin-bottom:1em;">
-          <input id="txtMailAddress" data-id="txtMailAddress" type="email" class="JOH-Font-M JOH-Border-1 JOH-Color-Form-Text JOH-P-SSEM" style="width:600px;" placeholder="メールアドレス">
+          <input id="txtMailAddress" data-id="txtMailAddress" type="email" data-item_id="mailAddress" class="JOH-Font-M JOH-Border-1 JOH-Color-Form-Text JOH-P-SSEM" style="width:600px;" placeholder="メールアドレス">
         </dd>
         <dt style="margin-bottom:1em;">
         <p class="JOH-Font-SS">ご提供いただいた個人情報は@link([ 'link_id'=>'keyword','link_item_id'=>'service_name' ])@endlinkに会員登録し、<br>

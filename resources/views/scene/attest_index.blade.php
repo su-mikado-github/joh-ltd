@@ -20,12 +20,12 @@
     <dl class="JOH-W-Full">
     <dt><label for="txtLoginId">メールアドレス</label></dt>
     <dd style="margin-bottom:1em;">
-      <input id="txtLoginId" data-id="txtLoginId" type="email" class="JOH-W-Full JOH-Font-S JOH-Border-1 JOH-Color-Form-Text" style="padding:0.5em;" placeholder="メールアドレス">
+      <input id="txtLoginId" data-id="txtLoginId" type="email" data-item_id="loginId" class="JOH-W-Full JOH-Font-S JOH-Border-1 JOH-Color-Form-Text" style="padding:0.5em;" placeholder="メールアドレス">
       <p class="JOH-W-Full JOH-Font-SS" style="color:#00a0e8;">メールアドレスを忘れた方はお客様サポートまで</p>
     </dd>
     <dt><label for="txtLoginPassword">パスワード</label></dt>
     <dd style="margin-bottom:1em;">
-      <input id="txtLoginPassword" data-id="txtLoginPassword" type="password" class="JOH-W-Full JOH-Font-S JOH-Border-1 JOH-Color-Form-Text" style="padding:0.5em;" placeholder="パスワード">
+      <input id="txtLoginPassword" data-id="txtLoginPassword" type="password" data-item_id="loginPw" class="JOH-W-Full JOH-Font-S JOH-Border-1 JOH-Color-Form-Text" style="padding:0.5em;" placeholder="パスワード">
       <p class="JOH-Font-SS" style="color:#00a0e8;">パスワードを忘れた方はこちら</p>
     </dd>
     </dl>

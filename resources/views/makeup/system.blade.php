@@ -58,6 +58,35 @@ a
 	color: inherit;
 }
 
+{{-- 入力装飾 --}}
+span.JOH-Input-Marker
+{
+	display: none;
+	border-radius: 4px;
+	font-size: 8pt;
+	color: white;
+	padding: 2px 4px;
+	vertical-align: middle;
+	margin: 0px 4px;
+}
+
+.JOH-Input-Required > span.JOH-Input-Marker
+{
+	display: inline-block;
+	background-color: red;
+}
+
+.JOH-Input-Any > span.JOH-Input-Marker
+{
+	display: inline-block;
+	background-color: blue;
+}
+
+.JOH-Input-Error
+{
+	border: 1px solid red !important;
+}
+
 {{-- 横並び --}}
 dl.JOH-Horizontal
 {
@@ -581,6 +610,43 @@ dl.JOH-Virtical.Separated > *:last-child
 .JOH-LineH-XS
 {
 	line-height: 0.6rem;
+}
+
+{{-- 文字装飾 --}}
+.JOH-Font-Normal
+{
+	font-weight: normal;
+	text-decoration: none;
+}
+
+.JOH-Font-Weight-Normal
+{
+	font-weight: normal;
+}
+
+.JOH-Font-Weight-Bold
+{
+	font-weight: bold;
+}
+
+.JOH-Font-Underline
+{
+	text-decoration: underline;
+}
+
+.JOH-Font-Overline
+{
+	text-decoration: overline;
+}
+
+.JOH-Font-Cancel
+{
+	text-decoration: overline;
+}
+
+.JOH-Font-Blink
+{
+	text-decoration: blink;
 }
 
 {{-- インライン位置定義 --}}
