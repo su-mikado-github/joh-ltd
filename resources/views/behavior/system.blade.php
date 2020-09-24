@@ -35,6 +35,14 @@ HelperJS.namespace("JOH.events", function(ns) {
 	};
 
 	ns.success = function success(ctrls, handler) {
+		if (typeof(ctrls) === "function" && !ctrls) {
+			handler = ctrls;
+			ctrls = {};
+		}
+		else if (!ctrls) {
+			ctrls = {};
+		}
+
 		JOH.events.clearErrors(ctrls);
 
 		return function(result) {

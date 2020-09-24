@@ -1,3 +1,6 @@
+<?php
+use App\Models\DivisionValue;
+?>
 @extends('scene.layout.normal')
 
 @section('makeup')
@@ -100,6 +103,15 @@
         @case (8)
           <input type="{!! (empty($attr_def->text_type) ? 'text' : $attr_def->text_type) !!}" id="{!! $id !!}" minlength="{!! $attr_def->min_length !!}" maxlength="{!! $attr_def->max_length !!}" pattern="{!! $attr_def->regex !!}" data-id="{!! $id !!}" data-attr_def_group_id="{{ $attr_def->attr_def_group_id }}" data-item_id="{{ $attr_def->id }}" data-attr_def_id="{{ $attr_def->id }}" class="JOH-Font-S JOH-Border-1 JOH-Color-Form-Text" style="padding:0.5em;{!! $input_width !!}" placeholder="{{ $attr_def->example }}"{!! $required !!}>
         @break
+--}}
+        @case (9)
+          <div style="{!! $input_width !!}" data-item_id="{{ $attr_def->id }}" data-attr_def_group_id="{{ $attr_def->attr_def_group_id }}" class="JOH-Wrap-Manual JOH-P-XSEM">
+            @if ($attr_def->flag_label_display==1)<label for="{!! $id !!}">{{ $attr_def->flag_label }}</label>@endif
+            <input type="checkbox" id="{!! $id !!}" data-id="{!! $id !!}" data-attr_def_id="{{ $attr_def->id }}" value="1">
+            @if ($attr_def->flag_label_display==2)<label for="{!! $id !!}">{{ $attr_def->flag_label }}</label>@endif
+          </div>
+        @break
+{{--
         @case (99)
           <input type="{!! (empty($attr_def->text_type) ? 'text' : $attr_def->text_type) !!}" id="{!! $id !!}" minlength="{!! $attr_def->min_length !!}" maxlength="{!! $attr_def->max_length !!}" pattern="{!! $attr_def->regex !!}" data-id="{!! $id !!}" data-attr_def_group_id="{{ $attr_def->attr_def_group_id }}" data-item_id="{{ $attr_def->id }}" data-attr_def_id="{{ $attr_def->id }}" class="JOH-Font-S JOH-Border-1 JOH-Color-Form-Text" style="padding:0.5em;{!! $input_width !!}" placeholder="{{ $attr_def->example }}"{!! $required !!}>
 --}}
@@ -112,7 +124,7 @@
       </dl>
     </section>
     <section style="padding:2em;">
-      <button id="btnConfirm" data-id="btnConfirm" type="button" class="JOH-Font-M JOH-Color-Button-Main JOH-Border-3 JOH-P-SSEM" style="width:600px;">》&nbsp;確認画面へ</button>
+      <button id="btnConfirm" data-id="btnConfirm" type="button" class="JOH-Font-M JOH-Color-Button-Main JOH-Border-3 JOH-P-SSEM" style="width:600px;">»&nbsp;確認画面へ</button>
     </section>
 
 </article>

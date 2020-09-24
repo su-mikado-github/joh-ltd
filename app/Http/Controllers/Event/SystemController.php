@@ -238,6 +238,12 @@ class SystemController extends Controller {
                     break;
                 case 8:
                     break;
+                case 9:     //フラグ
+                    $rule[] = 'boolean';
+                    if ($attr_def->require_flag) {
+                        $rule[] = 'same:true';
+                    }
+                    break;
                 case 99:
                     break;
             }

@@ -17,7 +17,6 @@ class AgentRegistPreviewController extends Controller {
     //
     public function index(Request $request) {
         $params = SceneHelper::get($request);
-        Log::debug($params);
 
         //会員情報の属性定義を取得する
         $attr_defs = AttrDef::rowsetByAttrDefGroupId('agent');

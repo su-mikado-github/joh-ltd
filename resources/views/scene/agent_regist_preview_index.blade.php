@@ -23,7 +23,7 @@ Log::debug($user_info);
 @section('content')
 <article class="JOH-Flex Rows-CC" style="padding:1em;align-items:center;">
     <section class="JOH-Flex Rows-CC" style="padding:2em;">
-      <h1 class="JOH-IPos-Center JOH-Font-LL" style="margin-bottom:1em;">新規会員登録（無料）</h1>
+      <h1 class="JOH-IPos-Center JOH-Font-LL" style="margin-bottom:1em;">代理店様お問い合わせ</h1>
 
       <div class="" style="width:800px;">
         @foreach ($user_info as $item)
@@ -40,8 +40,8 @@ Log::debug($user_info);
       </p>
     </section>
     <section class="JOH-Flex Rows-CC" style="padding:2em;">
-      <button id="btnAccept" data-id="btnAccept" type="button" class="JOH-Font-M JOH-Color-Button-Main JOH-Border-3 JOH-P-SSEM JOH-MV-XSEM JOH-Font-Weight-Bold" style="width:600px;">上記に同意して登録する</button>
-      <button id="btnBackword" data-id="btnBackword" type="button" class="JOH-Font-M JOH-Color-Button-Sub JOH-Border-3 JOH-P-SSEM JOH-MV-XSEM JOH-Font-Weight-Bold" style="width:600px;">登録内容を修正する</button>
+      <button id="btnAccept" data-id="btnAccept" type="button" class="JOH-Font-M JOH-Color-Button-Main JOH-Border-3 JOH-P-SSEM JOH-MV-XSEM JOH-Font-Weight-Bold" style="width:600px;">»&nbsp;お問い合わせする(CTA)</button>
+      <button id="btnBackword" data-id="btnBackword" type="button" class="JOH-Font-M JOH-Color-Button-Sub JOH-Border-3 JOH-P-SSEM JOH-MV-XSEM JOH-Font-Weight-Bold" style="width:600px;">内容を修正する</button>
     </section>
 </article>
 @endsection

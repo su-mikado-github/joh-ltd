@@ -16,8 +16,6 @@ class AgentRegistController extends DispatchController {
 
     //
     public function confirm(Request $request, array $input, array $params) {
-//         $input = SceneHelper::input($request);
-
         //会員情報の属性定義を取得する
         $attr_defs = AttrDef::rowsetByAttrDefGroupId('agent');
 
@@ -132,6 +130,12 @@ class AgentRegistController extends DispatchController {
                     break;
                 case 8:
                     break;
+                case 9:     //フラグ
+                    $rule[] = 'boolean';
+                    if ($attr_def->require_flag) {
+                        $rule[] = 'same:true';
+                    }
+                    break;
                 case 99:
                     break;
             }
@@ -149,7 +153,7 @@ class AgentRegistController extends DispatchController {
             $regist_data[] = [  'id'=>$attr_def->id, 'value'=>$input[$attr_def->id] ];
         }
 
-        return SceneHelper::ok(null, [
+        return SceneHelper::forward('/scene/agent_regist_preview', [
             'regist_data' => $regist_data,
         ]);
     }

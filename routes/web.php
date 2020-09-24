@@ -29,6 +29,7 @@ Route::prefix('scene')->group(function() {
     Route::get('new_user_preview', 'Scene\NewUserPreviewController@index');
 
     Route::get('agent_regist', 'Scene\AgentRegistController@index');
+    Route::get('agent_regist_preview', 'Scene\AgentRegistPreviewController@index');
 });
 
 //画面の振る舞いを処理するスクリプト用ルーティング

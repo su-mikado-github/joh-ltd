@@ -54,6 +54,9 @@ HelperJS.screendef(function AgentRegist() {
 <?php                   break;
                     }
                     break;
+                case 9: ?>
+                    data["{!! $attr_def->id !!}"] = ctrls.{!! $id !!}.checked();
+<?php               break;
             }
         } ?>
 

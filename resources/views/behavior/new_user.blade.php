@@ -60,21 +60,13 @@ HelperJS.screendef(function NewUser() {
 <?php                   break;
                     }
                     break;
+                case 9: ?>
+                    data["{!! $attr_def->id !!}"] = ctrls.{!! $id !!}.checked();
+<?php               break;
             }
         } ?>
 
 		HelperJS.event("system", "new_user_check", data, JOH.events.success(_itemIdControlMap));
-//        HelperJS.api("{!! SceneHelper::url('/event/system/new_user_check') !!}", data, function(result) {
-//            if (result.status === "OK") {
-//                location.assign(result.url);
-//            }
-//            else if (result.status === "INVALID") {
-//                alert(JSON.stringify(result));
-//            }
-//            else if (result.status === "ERROR") {
-//                alert(result.messages);
-//            }
-//        });
     };
 
     _this.initPanel = function initPanel() {
@@ -82,10 +74,5 @@ HelperJS.screendef(function NewUser() {
         _this.controls.btnPreview.click(_this.handles());
 
 		_itemIdControlMap = JOH.events.buildItemControlMap(_this);
-//		var items = _this.finds("[data-item_id]");
-//		for (var i=0; i<items.length; i++) {
-//			var item = items[i];
-//			_itemIdControlMap[item.data("item_id")] = item;
-//		}
     };
 });
