@@ -44,7 +44,7 @@ class AgentInquiryed extends Mailable {
 
         //認証メールの送信
         return $this->text('emails.agent_register_plain')
-            ->subject("会員登録完了のお知らせ〔{$this->system->name}〕")
+            ->subject("代理店のお問い合わせいただき有難うございます〔{$this->system->name}〕")
             ->from($this->system->from_email, $this->system->from_email_name)
             ->bcc([ $this->system->from_email ])
             ->with([

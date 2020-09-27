@@ -64,7 +64,7 @@ class SceneHelper {
         return [ 'status'=>self::BACKWORD ];
     }
 
-    public static function invalid($messages, array $errors) {
+    public static function invalid($messages, $errors) {
         return [ 'status'=>self::INVALID, 'messages'=>$messages, 'errors'=>$errors ];
     }
 
