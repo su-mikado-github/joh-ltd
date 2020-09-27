@@ -19,6 +19,9 @@ Route::prefix('system')->group(function() {
     Route::post('user_regist', 'Event\\SystemController@user_regist');
     Route::post('new_user_check', 'Event\\SystemController@new_user_check');
     Route::post('new_user_apply', 'Event\\SystemController@new_user_apply');
+
+    Route::post('new_agent_user_check', 'Event\\SystemController@new_agent_user_check');
+    Route::post('new_agent_user_apply', 'Event\\SystemController@new_agent_user_apply');
 });
 
 Route::post('agent_regist/{method}', 'Event\\AgentRegistController@method_dispatch');

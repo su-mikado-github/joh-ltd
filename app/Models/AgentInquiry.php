@@ -88,4 +88,11 @@ SQL_END;
 
         return $id;
     }
+
+    public static function rowByAgentInquiryId($agent_inquiry_id) {
+        return DB::table('agent_inquirys')->where('id', $agent_inquiry_id)->first();
+    }
+
+    //
+    public $incrementing = false;
 }

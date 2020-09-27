@@ -39,7 +39,7 @@ class AgentInquiryed extends Mailable {
      */
     public function build() {
         //各リンクの取得
-        $user_regist= Screen::rowByScreenId('new_user');             //会員登録画面
+        $user_regist= Screen::rowByScreenId('new_agent_user');          //会員登録画面
         $service_terms = Screen::rowByScreenId('service_terms');        //利用規約
 
         //認証メールの送信

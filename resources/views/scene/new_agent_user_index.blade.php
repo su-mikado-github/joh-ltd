@@ -8,7 +8,7 @@ use App\Helpers\SceneHelper;
 @endsection
 
 @section('behavior')
-<script type="text/javascript" charset="utf-8" src="{!! SceneHelper::url('/behavior/new_user') !!}"></script>
+<script type="text/javascript" charset="utf-8" src="{!! SceneHelper::url('/behavior/new_agent_user') !!}"></script>
 @endsection
 
 @section('header')
@@ -17,7 +17,7 @@ use App\Helpers\SceneHelper;
 @endsection
 
 @section('content')
-<article class="JOH-Flex Rows-CC" style="padding:1em;align-items:center;"><input type="hidden" id="varTemporaryRegistId"  data-id="varTemporaryRegistId" value="{!! $temporary_regist_id !!}">
+<article class="JOH-Flex Rows-CC" style="padding:1em;align-items:center;"><input type="hidden" id="varAgentInquiryId"  data-id="varAgentInquiryId" value="{!! $agent_inquiry_id !!}">
     <section class="JOH-Flex Rows-CC" style="padding:2em;">
       <h1 class="JOH-IPos-Center JOH-Font-LL" style="margin-bottom:1em;">新規会員登録（無料）</h1>
 
@@ -49,26 +49,26 @@ use App\Helpers\SceneHelper;
         @switch ($attr_def->value_type)
         @case (1)
           <input type="{!! (empty($attr_def->text_type) ? 'text' : $attr_def->text_type) !!}" id="{!! $id !!}" minlength="{!! $attr_def->min_length !!}" maxlength="{!! $attr_def->max_length !!}" pattern="{!! $attr_def->regex !!}" data-id="{!! $id !!}" data-attr_def_group_id="{{ $attr_def->attr_def_group_id }}"
-                 data-item_id="{{ $attr_def->id }}" data-attr_def_id="{{ $attr_def->id }}" class="JOH-Font-S JOH-Border-1 JOH-Color-Form-Text" style="padding:0.5em;{!! $input_width !!}" placeholder="{{ $attr_def->name }}"{!! $required !!} value="{!! @$user_attr_map[$attr_def->id]->attr_value !!}">
+                 data-item_id="{{ $attr_def->id }}" data-attr_def_id="{{ $attr_def->id }}" class="JOH-Font-S JOH-Border-1 JOH-Color-Form-Text" style="padding:0.5em;{!! $input_width !!}" placeholder="{{ $attr_def->name }}"{!! $required !!} value="{!! @$user_attr_map[$attr_def->id]['value'] !!}">
         @break
         @case (11)
-          <textarea  id="{!! $id !!}" data-id="{!! $id !!}" data-attr_def_group_id="{{ $attr_def->attr_def_group_id }}" data-item_id="{{ $attr_def->id }}" data-attr_def_id="{{ $attr_def->id }}" {!! ($attr_def->input_height ? ' rows="' . $attr_def->input_height . '"' : '') !!} class="JOH-Font-S JOH-Border-1 JOH-Color-Form-Text" style="padding:0.5em;{!! $input_width !!}"{!! $required !!} value="{!! @$user_attr_map[$attr_def->id] !!}"></textarea>
+          <textarea  id="{!! $id !!}" data-id="{!! $id !!}" data-attr_def_group_id="{{ $attr_def->attr_def_group_id }}" data-item_id="{{ $attr_def->id }}" data-attr_def_id="{{ $attr_def->id }}" {!! ($attr_def->input_height ? ' rows="' . $attr_def->input_height . '"' : '') !!} class="JOH-Font-S JOH-Border-1 JOH-Color-Form-Text" style="padding:0.5em;{!! $input_width !!}"{!! $required !!} value="{!! @$user_attr_map[$attr_def->id]['value'] !!}"></textarea>
         @break
         @case (2)
           <input type="{!! (empty($attr_def->text_type) ? 'number' : $attr_def->text_type) !!}" id="{!! $id !!}" min="{!! $attr_def->min_bigint_value !!}" max="{!! $attr_def->max_bigint_value !!}" step="{!! $attr_def->bigint_step_value !!}" data-id="{!! $id !!}" data-attr_def_group_id="{{ $attr_def->attr_def_group_id }}"
-                 data-item_id="{{ $attr_def->id }}" data-attr_def_id="{{ $attr_def->id }}" class="JOH-Font-S JOH-Border-1 JOH-Color-Form-Text" style="padding:0.5em;{!! $input_width !!}" placeholder="{{ $attr_def->name }}"{!! $required !!} value="{!! @$user_attr_map[$attr_def->id]->attr_value !!}">
+                 data-item_id="{{ $attr_def->id }}" data-attr_def_id="{{ $attr_def->id }}" class="JOH-Font-S JOH-Border-1 JOH-Color-Form-Text" style="padding:0.5em;{!! $input_width !!}" placeholder="{{ $attr_def->name }}"{!! $required !!} value="{!! @$user_attr_map[$attr_def->id]['value'] !!}">
         @break
         @case (3)
           <input type="{!! (empty($attr_def->text_type) ? 'number' : $attr_def->text_type) !!}" id="{!! $id !!}" min="{!! $attr_def->min_double_value !!}" max="{!! $attr_def->max_double_value !!}" step="{!! $attr_def->double_step_value !!}" data-id="{!! $id !!}" data-attr_def_group_id="{{ $attr_def->attr_def_group_id }}"
-                 data-item_id="{{ $attr_def->id }}" data-attr_def_id="{{ $attr_def->id }}" class="JOH-Font-S JOH-Border-1 JOH-Color-Form-Text" style="padding:0.5em;{!! $input_width !!}" placeholder="{{ $attr_def->name }}"{!! $required !!} value="{!! @$user_attr_map[$attr_def->id]->attr_value !!}">
+                 data-item_id="{{ $attr_def->id }}" data-attr_def_id="{{ $attr_def->id }}" class="JOH-Font-S JOH-Border-1 JOH-Color-Form-Text" style="padding:0.5em;{!! $input_width !!}" placeholder="{{ $attr_def->name }}"{!! $required !!} value="{!! @$user_attr_map[$attr_def->id]['value'] !!}">
         @break
         @cas e(4)
           <input type="{!! (empty($attr_def->text_type) ? 'date' : $attr_def->text_type) !!}" id="{!! $id !!}" min="{!! $attr_def->start_date !!}" max="{!! $attr_def->end_date !!}" data-id="{!! $id !!}" data-attr_def_group_id="{{ $attr_def->attr_def_group_id }}"
-                 data-item_id="{{ $attr_def->id }}" data-attr_def_id="{{ $attr_def->id }}" class="JOH-Font-S JOH-Border-1 JOH-Color-Form-Text" style="padding:0.5em;{!! $input_width !!}" placeholder="{{ $attr_def->name }}"{!! $required !!} value="{!! @$user_attr_map[$attr_def->id]->attr_value !!}">
+                 data-item_id="{{ $attr_def->id }}" data-attr_def_id="{{ $attr_def->id }}" class="JOH-Font-S JOH-Border-1 JOH-Color-Form-Text" style="padding:0.5em;{!! $input_width !!}" placeholder="{{ $attr_def->name }}"{!! $required !!} value="{!! @$user_attr_map[$attr_def->id]['value'] !!}">
         @break
         @case (5)
           <input type="{!! (empty($attr_def->text_type) ? 'time' : $attr_def->text_type) !!}" id="{!! $id !!}" min="{!! $attr_def->start_time !!}" max="{!! $attr_def->end_time !!}" data-id="{!! $id !!}" data-attr_def_group_id="{{ $attr_def->attr_def_group_id }}"
-                 data-item_id="{{ $attr_def->id }}" data-attr_def_id="{{ $attr_def->id }}" class="JOH-Font-S JOH-Border-1 JOH-Color-Form-Text" style="padding:0.5em;{!! $input_width !!}" placeholder="{{ $attr_def->name }}"{!! $required !!} value="{!! @$user_attr_map[$attr_def->id]->attr_value !!}">
+                 data-item_id="{{ $attr_def->id }}" data-attr_def_id="{{ $attr_def->id }}" class="JOH-Font-S JOH-Border-1 JOH-Color-Form-Text" style="padding:0.5em;{!! $input_width !!}" placeholder="{{ $attr_def->name }}"{!! $required !!} value="{!! @$user_attr_map[$attr_def->id]['value'] !!}">
         @break
         @case (6)
         <?php
@@ -78,7 +78,7 @@ use App\Helpers\SceneHelper;
           @case (1)
             <select id="{!! $id !!}" data-id="{!! $id !!}" data-attr_def_group_id="{{ $attr_def->attr_def_group_id }}" data-item_id="{{ $attr_def->id }}" data-attr_def_id="{{ $attr_def->id }}" class="JOH-Font-S JOH-Border-1 JOH-Color-Form-Text" style="padding:0.5em;{!! $input_width !!}"{!! $required !!}>
             @foreach ($list as $item)
-              <option value="{!! $item->value !!}"{!! ($item->value==(@$user_attr_map[$attr_def->id]->attr_value ?: $attr_def->default_attr_value) ? ' selected' : '') !!}>{!! $item->name !!}</option>
+              <option value="{!! $item->value !!}"{!! ($item->value==(@$user_attr_map[$attr_def->id]['value'] ?: $attr_def->default_attr_value) ? ' selected' : '') !!}>{!! $item->name !!}</option>
             @endforeach
             </select>
           @break;
@@ -86,7 +86,7 @@ use App\Helpers\SceneHelper;
             <div style="{!! $input_width !!}" data-item_id="{{ $attr_def->id }}" data-attr_def_group_id="{{ $attr_def->attr_def_group_id }}">
             @foreach ($list as $item)
               <div class="JOH-Wrap-Manual JOH-P-XSEM" style="margin-right:1em;">
-                <input type="radio" id="{!! $id !!}{!! $item->value !!}" data-id="{!! $id !!}{!! $item->value !!}" name="{!! $id !!}" data-attr_def_group_id="{{ $attr_def->attr_def_group_id }}" value="{!! $item->value !!}"{!! ($item->value==(@$user_attr_map[$attr_def->id]->attr_value ?: $attr_def->default_attr_value) ? ' checked' : '') !!}><label for="{!! $id !!}{!! $item->value !!}">{!! $item->name !!}</label>
+                <input type="radio" id="{!! $id !!}{!! $item->value !!}" data-id="{!! $id !!}{!! $item->value !!}" name="{!! $id !!}" data-attr_def_group_id="{{ $attr_def->attr_def_group_id }}" value="{!! $item->value !!}"{!! ($item->value==(@$user_attr_map[$attr_def->id]['value'] ?: $attr_def->default_attr_value) ? ' checked' : '') !!}><label for="{!! $id !!}{!! $item->value !!}">{!! $item->name !!}</label>
               </div>
             @endforeach
             </div>
@@ -101,14 +101,14 @@ use App\Helpers\SceneHelper;
             </div>
           @break;
           @case (4)
-            <select size="{!! ($attr_def->input_height ?: count($list)) !!}" id="{!! $id !!}" data-id="{!! $id !!}" data-attr_def_group_id="{{ $attr_def->attr_def_group_id }}" data-item_id="{{ $attr_def->id }}" data-attr_def_id="{{ $attr_def->id }}" class="JOH-Font-S JOH-Border-1 JOH-Color-Form-Text" style="padding:0.5em;{!! $input_width !!}" placeholder="{{ $attr_def->name }}"{!! $required !!}>
+            <select size="{!! ($attr_def->input_height ?: count($list)) !!}" id="{!! $id !!}" data-id="{!! $id !!}" data-attr_def_group_id="{{ $attr_def->attr_def_group_id }}" data-item_id="{{ $attr_def->id }}" data-attr_def_id="{{ $attr_def->id }}" class="JOH-Font-S JOH-Border-1 JOH-Color-Form-Text" style="padding:0.5em;{!! $input_width !!}"{!! $required !!}>
             @foreach ($list as $item)
-              <option value="{!! $item->value !!}"{!! ($item->value==(@$user_attr_map[$attr_def->id]->attr_value ?: $attr_def->default_attr_value) ? ' selected' : '') !!}>{!! $item->name !!}</option>
+              <option value="{!! $item->value !!}"{!! ($item->value==(@$user_attr_map[$attr_def->id]['value'] ?: $attr_def->default_attr_value) ? ' selected' : '') !!}>{!! $item->name !!}</option>
             @endforeach
             </select>
           @break;
           @case (5)
-            <select size="{!! ($attr_def->input_height ?: count($list)) !!}" multiple id="{!! $id !!}" data-id="{!! $id !!}" data-attr_def_group_id="{{ $attr_def->attr_def_group_id }}" data-item_id="{{ $attr_def->id }}" data-attr_def_id="{{ $attr_def->id }}" class="JOH-Font-S JOH-Border-1 JOH-Color-Form-Text" style="padding:0.5em;{!! $input_width !!}" placeholder="{{ $attr_def->name }}"{!! $required !!}>
+            <select size="{!! ($attr_def->input_height ?: count($list)) !!}" multiple id="{!! $id !!}" data-id="{!! $id !!}" data-attr_def_group_id="{{ $attr_def->attr_def_group_id }}" data-item_id="{{ $attr_def->id }}" data-attr_def_id="{{ $attr_def->id }}" class="JOH-Font-S JOH-Border-1 JOH-Color-Form-Text" style="padding:0.5em;{!! $input_width !!}"{!! $required !!}>
             @foreach ($list as $item)
               <option value="{!! $item->value !!}">{!! $item->name !!}</option>
             @endforeach
@@ -116,30 +116,24 @@ use App\Helpers\SceneHelper;
           @break;
           @endswitch
         @break
-{{--
-        @case (7)
-          <input type="{!! (empty($attr_def->text_type) ? 'text' : $attr_def->text_type) !!}" id="{!! $id !!}" minlength="{!! $attr_def->min_length !!}" maxlength="{!! $attr_def->max_length !!}" pattern="{!! $attr_def->regex !!}" data-id="{!! $id !!}" data-attr_def_group_id="{{ $attr_def->attr_def_group_id }}" data-item_id="{{ $attr_def->id }}" data-attr_def_id="{{ $attr_def->id }}" class="JOH-Font-S JOH-Border-1 JOH-Color-Form-Text" style="padding:0.5em;{!! $input_width !!}" placeholder="{{ $attr_def->name }}"{!! $required !!}>
-        @break
-        @case (8)
-          <input type="{!! (empty($attr_def->text_type) ? 'text' : $attr_def->text_type) !!}" id="{!! $id !!}" minlength="{!! $attr_def->min_length !!}" maxlength="{!! $attr_def->max_length !!}" pattern="{!! $attr_def->regex !!}" data-id="{!! $id !!}" data-attr_def_group_id="{{ $attr_def->attr_def_group_id }}" data-item_id="{{ $attr_def->id }}" data-attr_def_id="{{ $attr_def->id }}" class="JOH-Font-S JOH-Border-1 JOH-Color-Form-Text" style="padding:0.5em;{!! $input_width !!}" placeholder="{{ $attr_def->name }}"{!! $required !!}>
-        @break
---}}
         @case (9)
           <div style="{!! $input_width !!}" data-item_id="{{ $attr_def->id }}" data-attr_def_group_id="{{ $attr_def->attr_def_group_id }}" class="JOH-Wrap-Manual JOH-P-XSEM">
             @if ($attr_def->flag_label_display==1)<label for="{!! $id !!}">{{ $attr_def->flag_label }}</label>@endif
-            <input type="checkbox" id="{!! $id !!}" data-id="{!! $id !!}" data-attr_def_id="{{ $attr_def->id }}" value="1"{!! ((@$user_attr_map[$attr_def->id]->attr_value ?: $attr_def->default_attr_value) ? ' checked' : '') !!}>
+            <input type="checkbox" id="{!! $id !!}" data-id="{!! $id !!}" data-attr_def_id="{{ $attr_def->id }}" value="1"{!! ((@$user_attr_map[$attr_def->id]['value'] ?: $attr_def->default_attr_value) ? ' checked' : '') !!}>
             @if ($attr_def->flag_label_display==2)<label for="{!! $id !!}">{{ $attr_def->flag_label }}</label>@endif
           </div>
         @break
-{{--
-        @case (99)
-          <input type="{!! (empty($attr_def->text_type) ? 'text' : $attr_def->text_type) !!}" id="{!! $id !!}" minlength="{!! $attr_def->min_length !!}" maxlength="{!! $attr_def->max_length !!}" pattern="{!! $attr_def->regex !!}" data-id="{!! $id !!}" data-attr_def_group_id="{{ $attr_def->attr_def_group_id }}" data-item_id="{{ $attr_def->id }}" data-attr_def_id="{{ $attr_def->id }}" class="JOH-Font-S JOH-Border-1 JOH-Color-Form-Text" style="padding:0.5em;{!! $input_width !!}" placeholder="{{ $attr_def->name }}"{!! $required !!}>
---}}
         @default
           <span>現在はサポートされていません。</span>
         @endswitch
       </dd>
       @endforeach
+      <dt class="JOH-Font-S"><label for="chkAgentApply">代理店をご希望の方</label></dt>
+      <dd style="margin-bottom:1em;">
+        <div class="JOH-Wrap-Manual JOH-P-XSEM">
+          <input type="checkbox" id="chkAgentApply" data-id="chkAgentApply" data-item_id="agent_apply" value="1"><label for="chkAgentApply">申請する</label>
+        </div>
+      </dd>
       </dl>
     </section>
     <section style="padding:2em;">

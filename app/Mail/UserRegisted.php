@@ -7,6 +7,10 @@ use App\Models\System;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use App\Models\User;
+use App\Models\UserAttr;
+
+use Log;
 
 class UserRegisted extends Mailable {
     use Queueable, SerializesModels;
@@ -33,9 +37,13 @@ class UserRegisted extends Mailable {
      */
     public function build() {
         //各リンクの取得
-        $mypage = Screen::rowByScreenId('mypage');                    //マイページ画面
+        $mypage = Screen::rowByScreenId('mypage');                      //マイページ画面
         $free_templates = Screen::rowByScreenId('free_templates');      //無料デザインテンプレート集画面
         $customer_support = Screen::rowByScreenId('customer_support');  //カスタマーサポート画面
+
+        $user = User::rowByUserId($this->user_id);
+
+        $user_attrs = UserAttr::rowsetByUserId($this->user_id);
 
         //認証メールの送信
         return $this->text('emails.user_registed_plain')
@@ -44,9 +52,11 @@ class UserRegisted extends Mailable {
             ->bcc([ $this->system->from_email ])
             ->with([
                 'system' => $this->system,
-                'mypagge_url' => @$mypage->url,
+                'mypage_url' => @$mypage->url,
                 'free_templates_url' => @$free_templates->url,
                 'customer_support_url' => @$customer_support->url,
+                'user' => $user,
+                'user_attrs' => $user_attrs,
             ]);
         ;
     }

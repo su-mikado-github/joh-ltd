@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 use DB;
 
 class User extends Model {
+    public static function rowByUserId($user_id) {
+        return DB::table('users')->where('id', $user_id)->first();
+    }
+
     /**
      * ログインIDとパスワードに一致する利用者情報を取得する
      * @param string $login_id
@@ -238,18 +242,6 @@ SQL_END;
             DB::insert($insert_sql, [ $user_id, $password, $user_id, $user_id, __METHOD__ ]);
 
             //利用者属性の保存
-            $update_sql = <<<SQL_END
-update
-  user_attrs
-set
-  attr_value = ?
-  , modify_tm = UNIX_TIMESTAMP()
-  , modify_id = ?
-  , program = ?
-where
-  user_id = ?
-  and attr_def_id = ?
-SQL_END;
             $insert_sql = <<<SQL_END
 insert into user_attrs (
   user_id
@@ -279,10 +271,7 @@ SQL_END;
             foreach ($user_attrs as $user_attr) {
                 $user_attr_value = (is_array($user_attr['value']) ? implode(',', $user_attr['value']) : $user_attr['value']);
 
-                $count = DB::update($update_sql, [ $user_attr_value, $user_id, __METHOD__, $user_id, $user_attr['id'] ]);
-                if ($count == 0) {
-                    DB::insert($insert_sql, [ $user_id, $user_attr['id'], $user_attr_value, $user_id, $user_id, __METHOD__ ]);
-                }
+                DB::insert($insert_sql, [ $user_id, $user_attr['id'], $user_attr_value, $user_id, $user_id, __METHOD__ ]);
             }
 
             //一般会員としてのロールを付与する
@@ -315,6 +304,153 @@ SQL_END;
             DB::insert($sql, [ $user_id, $user_id, $user_id, __METHOD__ ]);
         });
     }
+
+    public static function updateByPasswordFromAgent($agent_inquiry_id, $email, $password, $agent_apply, array $user_attrs) {
+        $user_id = uniqid();
+
+        return DB::transaction(function($c) use($user_id, $agent_inquiry_id, $email, $password, $agent_apply, $user_attrs) {
+            //利用者情報の作成
+            $insert_sql = <<<SQL_END
+insert into users (
+    id
+    , nickname
+    , email
+    , login_id
+    , admin_flag
+    , retry_count
+    , last_login_dtm
+    , regist_dtm
+    , create_tm
+    , create_id
+    , modify_tm
+    , modify_id
+    , program
+    , delete_flag
+)
+values (
+    ?
+    , NULL
+    , ?
+    , ?
+    , 0
+    , 0
+    , NULL
+    , CURRENT_TIMESTAMP()
+    , UNIX_TIMESTAMP()
+    , ?
+    , UNIX_TIMESTAMP()
+    , ?
+    , ?
+    , 0
+)
+SQL_END;
+            $c->insert($insert_sql, [ $user_id, $email, $email, $user_id, $user_id, __METHOD__ ]);
+
+            //新規パスワードを設定
+            $insert_sql = <<<SQL_END
+insert into user_passwords (
+  user_id
+  , password
+  , create_tm
+  , create_id
+  , modify_tm
+  , modify_id
+  , program
+  , delete_flag
+)
+values (
+  ?
+  , MD5(?)
+  , UNIX_TIMESTAMP()
+  , ?
+  , UNIX_TIMESTAMP()
+  , ?
+  , ?
+  , 0
+)
+SQL_END;
+            DB::insert($insert_sql, [ $user_id, $password, $user_id, $user_id, __METHOD__ ]);
+
+            //利用者属性の保存
+            $insert_sql = <<<SQL_END
+insert into user_attrs (
+  user_id
+  , attr_def_id
+  , attr_value
+  , publish
+  , create_tm
+  , create_id
+  , modify_tm
+  , modify_id
+  , program
+  , delete_flag
+)
+values (
+  ?
+  , ?
+  , ?
+  , 1
+  , UNIX_TIMESTAMP()
+  , ?
+  , UNIX_TIMESTAMP()
+  , ?
+  , ?
+  , 0
+)
+SQL_END;
+            foreach ($user_attrs as $user_attr) {
+                $user_attr_value = (is_array($user_attr['value']) ? implode(',', $user_attr['value']) : $user_attr['value']);
+
+                DB::insert($insert_sql, [ $user_id, $user_attr['id'], $user_attr_value, $user_id, $user_id, __METHOD__ ]);
+            }
+
+            //一般会員としてのロールを付与する
+            $sql = <<<SQL_END
+insert into user_roles (
+  user_id
+  , role_id
+  , start_date
+  , end_date
+  , create_tm
+  , create_id
+  , modify_tm
+  , modify_id
+  , program
+  , delete_flag
+)
+values (
+  ?
+  , ?
+  , '0001-01-01'
+  , '9999-12-31'
+  , UNIX_TIMESTAMP()
+  , ?
+  , UNIX_TIMESTAMP()
+  , ?
+  , ?
+  , 0
+)
+SQL_END;
+            DB::insert($sql, [ $user_id, ($agent_apply ? 'Agent' : 'User'), $user_id, $user_id, __METHOD__ ]);
+
+            //代理店問合せと登録した会員を関連付ける
+            $sql = <<<SQL_END
+update
+  agent_inquirys
+set
+  user_id = ?
+  , modify_tm = UNIX_TIMESTAMP()
+  , modify_id = ?
+  , program = ?
+where
+  id = ?
+SQL_END;
+            $c->update($sql, [ $user_id, $user_id, __METHOD__, $agent_inquiry_id ]);
+
+            return $user_id;
+        });
+    }
+
 
     //
     public $incrementing = false;
