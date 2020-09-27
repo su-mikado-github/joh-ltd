@@ -6,6 +6,7 @@ use App\Http\Controllers\DispatchController;
 use Illuminate\Http\Request;
 use App\Helpers\SceneHelper;
 use App\Models\AttrDef;
+use App\Models\DivisionValue;
 
 use Validator;
 
@@ -18,6 +19,9 @@ class AgentRegistController extends DispatchController {
     public function confirm(Request $request, array $input, array $params) {
         //会員情報の属性定義を取得する
         $attr_defs = AttrDef::rowsetByAttrDefGroupId('agent');
+
+        //区分値マスタを区分ID・区分値IDをキーとした連想配列として取得
+        $division_value_map = DivisionValue::mapByDivisionIdId(['*'], 0);
 
         $rules = [];
 
@@ -148,6 +152,7 @@ class AgentRegistController extends DispatchController {
             return [ 'status'=>'INVALID', 'messages'=>'入力にエラーがあります。', 'errors'=>$validator->errors() ];
         }
 
+
         $regist_data = [];
         foreach ($attr_defs as $attr_def) {
             $regist_data[] = [  'id'=>$attr_def->id, 'value'=>$input[$attr_def->id] ];
@@ -155,6 +160,9 @@ class AgentRegistController extends DispatchController {
 
         return SceneHelper::forward('/scene/agent_regist_preview', [
             'regist_data' => $regist_data,
+            'company_name' => $input['company_name'],
+            'charge_person_name' => $input['charge_person_name'],
+            'contact_email' => $input['contact_email'],
         ]);
     }
 }

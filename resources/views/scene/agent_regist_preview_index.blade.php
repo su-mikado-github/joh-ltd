@@ -12,7 +12,7 @@ Log::debug($user_info);
 @endsection
 
 @section('behavior')
-<script type="text/javascript" charset="utf-8" src="{!! SceneHelper::url('/behavior/new_user_preview') !!}"></script>
+<script type="text/javascript" charset="utf-8" src="{!! SceneHelper::url('/behavior/agent_regist_preview') !!}"></script>
 @endsection
 
 @section('header')

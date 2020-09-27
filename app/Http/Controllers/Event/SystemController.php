@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use App\Helpers\SceneHelper;
-use Illuminate\Validation\Rule;
 
 use Log;
 use Validator;
@@ -14,14 +13,13 @@ use Session;
 use Mail;
 
 use App\Models\AttrDef;
-use App\Models\System;
 use App\Models\User;
 use App\Models\UserRole;
 use App\Models\DivisionValue;
 use App\Helpers\ProfileHelper;
 
 use App\Mail\UserRegister;
-use App\Models\UserAttr;
+use App\Mail\UserRegisted;
 
 class SystemController extends Controller {
     const messages = [
@@ -72,12 +70,12 @@ class SystemController extends Controller {
         //最終ログイン日時を更新する
         User::updateLastLoginDtm($user->id);
 
-        return [ 'status'=>'OK', 'url'=>'/scene/top' ];
+        return SceneHelper::forward('/scene/top');
     }
 
     public function logout(Request $request) {
         ProfileHelper::logout();
-        return [ 'status'=>'OK' ];
+        return SceneHelper::ok();
     }
 
     public function user_regist(Request $request) {
@@ -102,7 +100,7 @@ class SystemController extends Controller {
         //認証メールの送信
         Mail::to($mailAddress)->send(new UserRegister($temporary_regist_id));
 
-        return [ 'status'=>'OK', 'url'=>SceneHelper::set('/scene/regist_mail_send', [ 'temporary_regist_id'=>$temporary_regist_id ]) ];
+        return SceneHelper::forward('/scene/regist_mail_send', [ 'temporary_regist_id'=>$temporary_regist_id ]);
     }
 
     public function new_user_check(Request $request) {
@@ -267,22 +265,22 @@ class SystemController extends Controller {
             return response('', 400);
         }
 
-        return [ 'status'=>'OK', 'url'=>SceneHelper::set('/scene/new_user_preview', [
+        return SceneHelper::forward('/scene/new_user_preview', [
             'temporary_regist_id' => $input['temporary_regist_id'],
             'user' => $user,
             'email' => $input['email'],
             'password' => $input['password'],
             'regist_data' => $regist_data,
-        ]) ];
+        ]);
     }
 
     public function new_user_apply(Request $request) {
         $params = SceneHelper::get($request);
-        Log::debug($params);        //DEBUG
 
         //
         $temporary_regist_id = $params['temporary_regist_id'];
         $user = $params['user'];
+        $email = $params['email'];
         $password = $params['password'];
         $regist_data = $params['regist_data'];
 
@@ -308,6 +306,9 @@ class SystemController extends Controller {
         //最終ログイン日時を更新する
         User::updateLastLoginDtm($user->id);
 
-        return [ 'status'=>'OK', 'url'=>'/scene/top' ];
+        //登録完了メールの送信
+        Mail::to($email)->send(new UserRegisted($user->id));
+
+        return SceneHelper::forward('/scene/top');
     }
 }

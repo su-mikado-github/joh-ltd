@@ -22,3 +22,4 @@ Route::prefix('system')->group(function() {
 });
 
 Route::post('agent_regist/{method}', 'Event\\AgentRegistController@method_dispatch');
+Route::post('agent_regist_preview/{method}', 'Event\\AgentRegistPreviewController@method_dispatch');

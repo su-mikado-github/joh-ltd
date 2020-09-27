@@ -44,6 +44,7 @@ Route::prefix('behavior')->group(function() {
     Route::get('new_user_preview', function() { return Response::view('behavior.new_user_preview')->header('Content-Type', 'text/javascript; charset=utf-8'); });
 
     Route::get('agent_regist', function() { return Response::view('behavior.agent_regist')->header('Content-Type', 'text/javascript; charset=utf-8'); });
+    Route::get('agent_regist_preview', function() { return Response::view('behavior.agent_regist_preview')->header('Content-Type', 'text/javascript; charset=utf-8'); });
 
 });
 

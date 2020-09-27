@@ -60,6 +60,9 @@ class AgentRegistPreviewController extends Controller {
         return view('scene.agent_regist_preview_index', [
             //
             'user_info' => $user_info,
+            'company_name' => $params['company_name'],
+            'charge_person_name' => $params['charge_person_name'],
+            'contact_email' => $params['contact_email'],
         ]);
     }
 }
