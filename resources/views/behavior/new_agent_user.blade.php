@@ -8,7 +8,7 @@ use App\Models\AttrDef;
 $attr_defs = AttrDef::rowsetByAttrDefGroupId('user');
 
 ?>
-HelperJS.screendef(function NewUser() {
+HelperJS.screendef(function NewAgentUser() {
     HelperJS.Screen.call(this);
 
     var _base = this.base();
@@ -19,10 +19,11 @@ HelperJS.screendef(function NewUser() {
     _this.btnPreview_click = function btnPreview_click(e, params, ctrls) {
         //
         var data = {
-            temporary_regist_id: ctrls.varTemporaryRegistId.value(),
+        	agent_inquiry_id: ctrls.varAgentInquiryId.value(),
 			email: ctrls.txtMailAddress.value(),
             password: ctrls.txtLoginPassword.value(),
             password_confirmation: ctrls.txtLoginPasswordConfirmation.value(),
+            agent_apply: ctrls.chkAgentApply.checked(),
         };
 <?php   foreach ($attr_defs as $attr_def) {
             $id = 'attr' . str_replace('_', '', ucwords($attr_def->id, '_'));
@@ -66,7 +67,7 @@ HelperJS.screendef(function NewUser() {
             }
         } ?>
 
-		HelperJS.event("system", "new_user_check", data, JOH.events.success(_itemIdControlMap));
+		HelperJS.event("system", "new_agent_user_check", data, JOH.events.success(_itemIdControlMap));
     };
 
     _this.initPanel = function initPanel() {

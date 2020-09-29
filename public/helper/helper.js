@@ -194,6 +194,9 @@
 				ctorName = "HelperJS.Button";
 			}
 		}
+		else if (node.tagName.toUpperCase() === "TEXTAREA") {
+			ctorName = "HelperJS.TextArea";
+		}
 		else if (node.tagName.toUpperCase() === "SELECT") {
 			ctorName = (!node.multiple ? "HelperJS.SelectBox" : "HelperJS.MultiSelectBox");
 		}
@@ -704,7 +707,7 @@
 		};
 
 		_this.styleClass = function styleClass(className, condition) {
-			if (typeof(className)!=="boolean" && typeof(condition)==="undefined") {
+			if (typeof(className)==="boolean" && typeof(condition)==="undefined") {
 				condition = className;
 				className = undefined;
 			}
@@ -1165,6 +1168,13 @@
 			var _this = this;
 		});
 
+		ns.TextArea = classdef(ns.InputControl, function TextArea(ownerPanel, tag) {
+			ns.InputControl.call(this, ownerPanel, tag);
+
+			var _base = this.base();
+			var _this = this;
+		});
+
 		ns.PasswordBox = classdef(ns.TextBox, function PasswordBox(ownerPanel, tag) {
 			ns.TextBox.call(this, ownerPanel, tag);
 
@@ -1586,21 +1596,6 @@
 //			return new Server(url, "POST");
 //		};
 //
-//		ns.event = function event(url, params, _success, _error) {
-//			function success(status, text) {
-//				if (typeof(_success) === "function") {
-//					_success(JSON.parse(text));
-//				}
-//			};
-//			function error(status) {
-//				if (typeof(_error) === "function") {
-//					_error(status);
-//				}
-//			};
-//
-//			HelperJS.post(url).success(success).error(error).send(params || {});
-//		};
-
 		ns.method = function method(url, method, params, _success, _error) {
 			function success(status, text) {
 				if (typeof(_success) === "function") {
@@ -1632,6 +1627,24 @@
 			};
 
 			HelperJS.post(url).success(success).error(error).sendJson(params);
+		};
+
+		ns.event = function event(scene, method, params, _success, _error) {
+			function success(status, text) {
+				if (typeof(_success) === "function") {
+					_success(JSON.parse(text));
+				}
+			};
+			function error(status) {
+				if (typeof(_error) === "function") {
+					_error(status);
+				}
+				else {
+					location.assign('/'+status);
+				}
+			};
+
+			HelperJS.post("/event/"+scene+"/"+method).success(success).error(error).sendJson(params);
 		};
 
 //		ns.find = function find(selector) {

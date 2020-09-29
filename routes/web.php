@@ -28,8 +28,10 @@ Route::prefix('scene')->group(function() {
     Route::get('new_user', 'Scene\NewUserController@index');
     Route::get('new_user_preview', 'Scene\NewUserPreviewController@index');
 
-
-
+    Route::get('agent_regist', 'Scene\AgentRegistController@index');
+    Route::get('agent_regist_preview', 'Scene\AgentRegistPreviewController@index');
+    Route::get('new_agent_user', 'Scene\NewUserController@agent_user');
+    Route::get('new_agent_user_preview', 'Scene\NewUserPreviewController@agent_user');
 });
 
 //画面の振る舞いを処理するスクリプト用ルーティング
@@ -43,7 +45,10 @@ Route::prefix('behavior')->group(function() {
     Route::get('new_user', function() { return Response::view('behavior.new_user')->header('Content-Type', 'text/javascript; charset=utf-8'); });
     Route::get('new_user_preview', function() { return Response::view('behavior.new_user_preview')->header('Content-Type', 'text/javascript; charset=utf-8'); });
 
-
+    Route::get('agent_regist', function() { return Response::view('behavior.agent_regist')->header('Content-Type', 'text/javascript; charset=utf-8'); });
+    Route::get('agent_regist_preview', function() { return Response::view('behavior.agent_regist_preview')->header('Content-Type', 'text/javascript; charset=utf-8'); });
+    Route::get('new_agent_user', function() { return Response::view('behavior.new_agent_user')->header('Content-Type', 'text/javascript; charset=utf-8'); });
+    Route::get('new_agent_user_preview', function() { return Response::view('behavior.new_agent_user_preview')->header('Content-Type', 'text/javascript; charset=utf-8'); });
 });
 
 //画面の装飾様スタイル用ルーティング

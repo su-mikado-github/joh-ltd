@@ -5,7 +5,7 @@ use App\Models\DivisionValue;
 use App\Models\AttrDef;
 
 ?>
-HelperJS.screendef(function NewUserPreview() {
+HelperJS.screendef(function NewAgentUserPreview() {
     HelperJS.Screen.call(this);
 
     var _base = this.base();
@@ -13,7 +13,7 @@ HelperJS.screendef(function NewUserPreview() {
 
     _this.btnAccept_click = function btnAccept_click(e, params, ctrls) {
         //
-        HelperJS.api("{!! SceneHelper::url('/event/system/new_user_apply') !!}", {}, JOH.events.success());
+        HelperJS.api("{!! SceneHelper::url('/event/system/new_agent_user_apply') !!}", {}, JOH.events.success());
     };
 
     _this.btnBackword_click = function btnBackword_click(e, params, ctrls) {
