@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use App\Helpers\SceneHelper;
+use Illuminate\Validation\Rule;
 
 use Log;
 use Validator;

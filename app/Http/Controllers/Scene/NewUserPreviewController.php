@@ -60,6 +60,7 @@ class NewUserPreviewController extends Controller {
     //
     public function index(Request $request) {
         $params = SceneHelper::get($request);
+        Log::debug($params);
 
         $user = $params['user'];
         if (!$user) {
