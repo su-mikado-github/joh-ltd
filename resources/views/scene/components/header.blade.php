@@ -28,11 +28,11 @@ $mypage = LinkItem::rowByLinkIdLinkItemId('*', 'mypage', !$is_guest);
       </span>
     </div>
     @if (!$is_guest)
-      @links([ 'id'=>'pnlHeaderMenuLeft', 'link_id'=>'header_left', 'certified'=>!$is_guest, 'class'=>['dl'=>'JOH-Horizontal Separated JOH-IPos-Left','dl/dd'=>'JOH-Color-Label-MenuItem JOH-PH-SSEM','dl/dd/a'=>'JOH-Font-S JOH-LineH-S'], 'style'=>[ 'dl'=>'border-left: 1px solid #cccccc;' ] ])
+      @links([ 'id'=>'pnlHeaderMenuLeft', 'link_id'=>'header_left', 'certified'=>!$is_guest, 'class'=>['dl'=>'JOH-Horizontal Separated JOH-IPos-Left','dl/dt'=>'JOH-Color-Label-MenuItem JOH-PH-SSEM','dl/dt/a'=>'JOH-Font-S JOH-LineH-S'], 'style'=>[ 'dl'=>'border-left: 1px solid #cccccc;' ] ])
       @endlinks
     @endif
   </div>
-  @links([ 'id'=>'pnlHeaderMenuRight', 'link_id'=>'header_right', 'certified'=>!$is_guest, 'class'=>['dl'=>'JOH-Horizontal Separated JOH-IPos-Right','dl/dd'=>'JOH-Color-Label-MenuItem JOH-PH-SSEM','dl/dd/a'=>'JOH-Font-S JOH-LineH-S'] ])
+  @links([ 'id'=>'pnlHeaderMenuRight', 'link_id'=>'header_right', 'certified'=>!$is_guest, 'class'=>['dl'=>'JOH-Horizontal Separated JOH-IPos-Right','dl/dt'=>'JOH-Color-Label-MenuItem JOH-PH-SSEM','dl/dt/a'=>'JOH-Font-S JOH-LineH-S'] ])
   @endlinks
 </nav>
 

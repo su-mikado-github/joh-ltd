@@ -21,7 +21,7 @@ $link_group_rels = LinkGroupRel::rowsetByLinkGroupId('footer_b');
     @foreach ($link_group_rels as $link_group_rel)
     <div class="JOH-PH-MEM" style="margin-bottom:2em;">
       <h3 class="JOH-Font-S" style="margin-bottom:1em;">{{ $link_group_rel->link_name }}</h3>
-      @links(['id'=>'pnl' . str_replace('_', '', ucwords($link_group_rel->link_group_id, '_')) . '_' . str_replace('_', '', ucwords($link_group_rel->link_id, '_')), 'link_id'=>$link_group_rel->link_id, 'certified'=>!$is_guest, 'class'=>[ 'dl'=>'JOH-Virtical', 'dl/dd'=>'JOH-Font-SS' ] ])
+      @links(['id'=>'pnl' . str_replace('_', '', ucwords($link_group_rel->link_group_id, '_')) . '_' . str_replace('_', '', ucwords($link_group_rel->link_id, '_')), 'link_id'=>$link_group_rel->link_id, 'certified'=>!$is_guest, 'class'=>[ 'dl'=>'JOH-Virtical', 'dl/dt'=>'JOH-Font-SS' ] ])
       @endlinks
     </div>
     @endforeach
