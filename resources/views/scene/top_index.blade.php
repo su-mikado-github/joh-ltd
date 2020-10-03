@@ -1,4 +1,4 @@
-@extends('scene.layout.normal')
+@extends('scene.layout.with_left')
 
 @section('makeup')
 @endsection
@@ -10,6 +10,13 @@
 @section('header')
 	@header(['id'=>'pnlHeader'])
 	@endheader
+	@header_menu(['id'=>'pnlHeaderMenu'])
+	@endheader_menu
+@endsection
+
+@section('left_side')
+	@side_menu_a(['id'=>'pnlSideMenu'])
+	@endside_menu_a
 @endsection
 
 @section('content')

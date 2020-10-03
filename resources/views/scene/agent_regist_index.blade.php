@@ -18,7 +18,7 @@ use App\Models\DivisionValue;
 @section('content')
 <article class="JOH-Flex Rows-CC" style="padding:1em;align-items:center;">
     <section class="JOH-Flex Rows-CC" style="padding:2em;">
-      <h1 class="JOH-IPos-Center JOH-Font-LL" style="margin-bottom:1em;">代理店様お問い合わせ</h1>
+      <h1 class="JOH-IPos-Center JOH-Font-LL" style="margin-bottom:1em;">代理店様&nbsp;お問い合わせ</h1>
 
       <dl class="JOH-W-Full">
 
@@ -33,7 +33,7 @@ use App\Models\DivisionValue;
       <dd class="JOH-Font-S" style="margin-bottom:1em;">
         @switch ($attr_def->value_type)
         @case (1)
-          <input type="{!! (empty($attr_def->text_type) ? 'text' : $attr_def->text_type) !!}" id="{!! $id !!}" minlength="{!! $attr_def->min_length !!}" maxlength="{!! $attr_def->max_length !!}" pattern="{!! $attr_def->regex !!}" data-id="{!! $id !!}" data-attr_def_group_id="{{ $attr_def->attr_def_group_id }}" data-item_id="{{ $attr_def->id }}" data-attr_def_id="{{ $attr_def->id }}" class="JOH-Font-S JOH-Border-1 JOH-Color-Form-Text" style="padding:0.5em;{!! $input_width !!}" placeholder="{{ $attr_def->example }}" title="{{ $attr_def->hint }}"{!! $required !!}>
+          <input type="{!! (empty($attr_def->text_type) ? 'text' : $attr_def->text_type) !!}" id="{!! $id !!}" minlength="{!! $attr_def->min_length !!}" maxlength="{!! $attr_def->max_length !!}" pattern="{!! $attr_def->regex !!}" onkeydown="JOH.events.textOnkeydown(event);" data-id="{!! $id !!}" data-attr_def_group_id="{{ $attr_def->attr_def_group_id }}" data-item_id="{{ $attr_def->id }}" data-attr_def_id="{{ $attr_def->id }}" class="JOH-Font-S JOH-Border-1 JOH-Color-Form-Text" style="padding:0.5em;{!! $input_width !!}" placeholder="{{ $attr_def->example }}" title="{{ $attr_def->hint }}"{!! $required !!}>
         @break
         @case (11)
           <textarea  id="{!! $id !!}" data-id="{!! $id !!}" data-attr_def_group_id="{{ $attr_def->attr_def_group_id }}" data-item_id="{{ $attr_def->id }}" data-attr_def_id="{{ $attr_def->id }}" {!! ($attr_def->input_height ? ' rows="' . $attr_def->input_height . '"' : '') !!} class="JOH-Font-S JOH-Border-1 JOH-Color-Form-Text" style="padding:0.5em;{!! $input_width !!}" placeholder="{{ $attr_def->example }}" title="{{ $attr_def->hint }}"{!! $required !!}></textarea>

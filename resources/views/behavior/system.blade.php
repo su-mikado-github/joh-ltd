@@ -16,6 +16,16 @@ HelperJS.namespace("JOH", function(ns) {
 });
 
 HelperJS.namespace("JOH.events", function(ns) {
+	ns.textOnkeydown = function(e) {
+		console.log(e.key);
+		if (e.key.length === 1) {
+			e.returnValue = (new RegExp(e.target.pattern)).test(e.target.value + e.key);
+		}
+		else if (e.key == "SPACE") {
+			e.returnValue = (new RegExp(e.target.pattern)).test(e.target.value + " ");
+		}
+	};
+
 	ns.buildItemControlMap = function buildItemControlMap(owner) {
 		var result = {};
 

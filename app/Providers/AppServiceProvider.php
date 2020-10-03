@@ -39,5 +39,9 @@ class AppServiceProvider extends ServiceProvider
         Blade::component('scene.components.footer_b', 'footer_b');
 
         Blade::component('scene.components.link', 'link');
+
+        Blade::component('scene.components.header_menu', 'header_menu');
+
+        Blade::component('scene.components.side_menu_a', 'side_menu_a');
     }
 }

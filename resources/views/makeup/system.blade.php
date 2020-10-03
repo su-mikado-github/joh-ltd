@@ -780,7 +780,7 @@ dl.JOH-Virtical.Separated > *:last-child
 	border-style: none;
 }
 
-<?php for ($i=1; $i<=3; $i++) { ?>
+<?php for ($i=1; $i<=10; $i++) { ?>
 .JOH-Border-<?=$i ?>
 {
 	border-width: <?=$i ?>px;
@@ -790,49 +790,25 @@ dl.JOH-Virtical.Separated > *:last-child
 .JOH-Border-Top-<?=$i ?>
 {
 	border-top-width: <?=$i ?>px;
-	border-left-width: 0px;
-	border-right-width: 0px;
-	border-bottom-width: 0px;
 	border-top-style: solid;
-	border-left-style: none;
-	border-right-style: none;
-	border-bottom-style: none;
 }
 
 .JOH-Border-Bottom-<?=$i ?>
 {
-	border-top-width: 0px;
-	border-left-width: 0px;
-	border-right-width: 0px;
 	border-bottom-width: <?=$i ?>px;
-	border-top-style: none;
-	border-left-style: none;
-	border-right-style: none;
 	border-bottom-style: solid;
 }
 
 .JOH-Border-Left-<?=$i ?>
 {
-	border-top-width: 0px;
 	border-left-width: <?=$i ?>px;
-	border-right-width: 0px;
-	border-bottom-width: 0px;
-	border-top-style: none;
 	border-left-style: solid;
-	border-right-style: none;
-	border-bottom-style: none;
 }
 
 .JOH-Border-Right-<?=$i ?>
 {
-	border-top-width: 0px;
-	border-left-width: 0px;
 	border-right-width: <?=$i ?>px;
-	border-bottom-width: 0px;
-	border-top-style: none;
-	border-left-style: none;
 	border-right-style: solid;
-	border-bottom-style: none;
 }
 <?php } ?>
 
