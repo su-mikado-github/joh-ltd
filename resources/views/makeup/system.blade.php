@@ -103,14 +103,14 @@ dl.JOH-Horizontal > dt
 */
 }
 
-dl.JOH-Horizontal.Separated > *
+dl.JOH-Horizontal.Separated > dt
 {
-    border-right: 1px solid {!! $color_palette['Border-Separated']->border_color !!};
+    border-left: 1px solid {!! $color_palette['Border-Separated']->border_color !!};
 }
 
-dl.JOH-Horizontal.Separated > *:last-child
+dl.JOH-Horizontal.Separated > *:first-child
 {
-    border-right: 0px none transparent;
+    border-left: 0px none transparent;
 }
 
 {{-- 縦並び --}}
@@ -122,18 +122,20 @@ dl.JOH-Virtical > dt
 , dl.JOH-Virtical > dd
 {
 	display: block;
+/*
 	padding-top: 0.25em;
 	padding-bottom: 0.25em;
+*/
 }
 
-dl.JOH-Virtical.Separated > *
+dl.JOH-Virtical.Separated > dt
 {
-    border-bottom: 1px solid {!! $color_palette['Border-Separated']->border_color !!};
+    border-top: 1px solid {!! $color_palette['Border-Separated']->border_color !!};
 }
 
-dl.JOH-Virtical.Separated > *:last-child
+dl.JOH-Virtical.Separated > *:first-child
 {
-    border-bottom: 0px none transparent;
+    border-top: 0px none transparent;
 }
 
 {{-- マージン --}}

@@ -19,19 +19,23 @@ $system = System::row();
   @yield('behavior')
 </head>
 <body>
-<header>
-@yield('header')
-</header>
-<div class="JOH-Flex JOH-MV-SSEM">
-<nav class="JOH-Block JOH-W-18EM">
-@yield('left_side')
-</nav>
-<section class="JOH-Block">
-@yield('content')
-</section>
-</div>
-<footer>
-@yield('footer')
-</footer>
+<table class="JOH-W-Full">
+<thead>
+<tr>
+  <td colspan="2">@yield('header')</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td class="JOH-W-18EM" style="vertical-align:top;">@yield('left_side')</td>
+  <td style="vertical-align:top;">@yield('content')</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+  <td colspan="2">@yield('footer')</td>
+</tr>
+</tfoot>
+</table>
 </body>
 </html>

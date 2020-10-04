@@ -16,7 +16,7 @@ $is_guest = ProfileHelper::is_guest($profile);
 <div id="{!! $id !!}" class="JOH-W-Full JOH-Color-Panel-SideMenuA">
   @links(['id'=>'SideMenuA', 'link_id'=>'side_menu_a', 'certified'=>!$is_guest,
     'class'=>[
-      '1/dl'=>'JOH-Vertical JOH-P-SSEM',
+      '1/dl'=>'JOH-Vertical JOH-PH-SSEM',
       '1/dl/dt'=>'JOH-PV-XSEM JOH-Border-Top-5 JOH-Border-Bottom-3 JOH-Color-Panel-SideMenuAItem',
       '1/dl/dt/a'=>'JOH-Font-L JOH-LineH-L JOH-Color-Panel-SideMenuA',
       '1/dl/dt/span'=>'JOH-Font-L JOH-LineH-L JOH-Color-Panel-SideMenuA',
@@ -25,7 +25,8 @@ $is_guest = ProfileHelper::is_guest($profile);
       '2/dl/dt/span'=>'JOH-Font-M JOH-LineH-M JOH-Color-Panel-SideMenuA',
     ],
     'style' => [
-      '1/dl/dd'=>'margin-bottom:1em;',
+      '1/dl'=>'margin-bottom:1em;',
+      '1/dl/dt'=>'margin-top:1em;',
     ],
    ])
   @endlinks

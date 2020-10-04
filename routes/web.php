@@ -32,6 +32,11 @@ Route::prefix('scene')->group(function() {
     Route::get('agent_regist_preview', 'Scene\AgentRegistPreviewController@index');
     Route::get('new_agent_user', 'Scene\NewUserController@agent_user');
     Route::get('new_agent_user_preview', 'Scene\NewUserPreviewController@agent_user');
+
+    //共同購入
+    Route::prefix('joint_purchase')->group(function() {
+        Route::get('top', 'Scene\JointPurchase\TopController@index');
+    });
 });
 
 //画面の振る舞いを処理するスクリプト用ルーティング
@@ -49,6 +54,11 @@ Route::prefix('behavior')->group(function() {
     Route::get('agent_regist_preview', function() { return Response::view('behavior.agent_regist_preview')->header('Content-Type', 'text/javascript; charset=utf-8'); });
     Route::get('new_agent_user', function() { return Response::view('behavior.new_agent_user')->header('Content-Type', 'text/javascript; charset=utf-8'); });
     Route::get('new_agent_user_preview', function() { return Response::view('behavior.new_agent_user_preview')->header('Content-Type', 'text/javascript; charset=utf-8'); });
+
+    //共同購入
+    Route::prefix('joint_purchase')->group(function() {
+//        Route::get('top', 'Scene\JoinPurchase\TopController@index');
+    });
 });
 
 //画面の装飾様スタイル用ルーティング
